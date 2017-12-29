@@ -92,6 +92,20 @@ if __name__ == '__main__':
         calories_str = str(monitor['calories'])
         heartrate_str = str(monitor['heartrate'])
         status_str = str(monitor['status'])
+	
+	time_float = float(time_str)
+        distance_float = float(distance_str)
+        spm_float = float(spm_str)
+        power_float = float(power_str)
+        pace_float = float(pace_str)
+        calhr_float = float(calhr_str)
+        calories_float = float(calories_str)
+        heartrate_float = float(heartrate_str)
+        status_float = float(status_str)
+	
+	workouttuple_float = (time_float,distance_float,spm_float,power_float,pace_float,calhr_float,calories_float,heartrate_float,status_float)
+	
+	
         #forceplot_str = str(monitor['forceplot'])
         #strokestate_str = str(monitor['strokerate'])
         
