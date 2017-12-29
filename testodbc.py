@@ -1,6 +1,6 @@
 import psycopg2
 
-conn = psycopg2.connect('host=localhost user=pi password=raspberry dbname=test')
+conn = psycopg2.connect('host=localhost user=andrew password=andrew dbname=test')
 
 cur = conn.cursor()
 
