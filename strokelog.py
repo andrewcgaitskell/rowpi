@@ -25,8 +25,10 @@ if __name__ == '__main__':
 
     #Open and prepare file
     write_file = open('workout.csv', 'w')
-    write_file.write('Time, Distance, SPM, Pace, Force Plot\n')
-
+    #write_file.write('Time, Distance, SPM, Pace, Force Plot\n')
+    #write_file.write('Time, Distance, SPM, Pace\n')
+    write_file.write('time,distance,spm,power,pace,calhr,calories,heartrate,status')
+    
     #Loop until workout has begun
     workout = erg.get_workout()
     print "Waiting for workout to start ..."
@@ -57,14 +59,33 @@ if __name__ == '__main__':
         #forceplot = erg.get_force_plot()
         #force.extend(forceplot['forceplot'])
 
-
         #Write data to write_file
-        workoutdata = str(monitor['time']) + "," + str(monitor['distance']) + "," + \
-            str(monitor['spm']) + "," + str(monitor['pace']) + ","
+        
+        time_str = str(monitor['time'])
+        distance_str = str(monitor['distance'])
+        spm_str = str(monitor['spm'])
+        power_str = str(monitor['power'])
+        pace_str = str(monitor['pace'])
+        calhr_str = str(monitor['calhr'])
+        calories_str = str(monitor['calories'])
+        heartrate_str = str(monitor['heartrate'])
+        status_str = str(monitor['status'])
+        #forceplot_str = str(monitor['forceplot'])
+        #strokestate_str = str(monitor['strokerate'])
+        
+        #Write data to write_file
+        
+        workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str)
+        workoutdata = ','.join(workouttuple)
+
+        write_file.write(workoutdata+'\n') 
+        
+        #workoutdata = str(monitor['time']) + "," + str(monitor['distance']) + "," + \
+        #    str(monitor['spm']) + "," + str(monitor['pace']) + ","
 
         #forcedata = ",".join([str(f) for f in force])
         #write_file.write(workoutdata + forcedata + '\n')
-        write_file.write(workoutdata + '\n')
+        #write_file.write(workoutdata + '\n')
         
         #Get workout conditions
         workout = erg.get_workout()
