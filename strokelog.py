@@ -75,13 +75,13 @@ if __name__ == '__main__':
 	force = forceplot['forceplot'] #start of pull (when strokestate first changed to 2)
 	monitor = erg.get_monitor() #get monitor data for start of stroke
 	#Loop during drive
-	#while forceplot['strokestate'] == 2:
+	while forceplot['strokestate'] == 2:
 	    #ToDo: sleep?
-	    #forceplot = erg.get_force_plot()
-	    #force.extend(forceplot['forceplot'])
+	    forceplot = erg.get_force_plot()
+	    force.extend(forceplot['forceplot'])
 
-	#forceplot = erg.get_force_plot()
-	#force.extend(forceplot['forceplot'])
+	forceplot = erg.get_force_plot()
+	force.extend(forceplot['forceplot'])
 
 	#Write data to write_file
 
