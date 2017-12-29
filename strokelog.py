@@ -138,12 +138,12 @@ if __name__ == '__main__':
 
         #Get workout conditions
         workout = erg.get_workout()
-            stroke_counter = stroke_counter + 1
-            print stroke_counter
+        stroke_counter = stroke_counter + 1
+        print stroke_counter
 
-        write_file.close()
+write_file.close()
 
-        cur.close()
-        conn.close()
+cur.close()
+conn.close()
 
-        print "Workout has ended"
+print "Workout has ended"
