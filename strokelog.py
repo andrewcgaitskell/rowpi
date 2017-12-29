@@ -27,7 +27,7 @@ if __name__ == '__main__':
     write_file = open('workout.csv', 'w')
     #write_file.write('Time, Distance, SPM, Pace, Force Plot\n')
     #write_file.write('Time, Distance, SPM, Pace\n')
-    write_file.write('time,distance,spm,power,pace,calhr,calories,heartrate,status')
+    write_file.write('time,distance,spm,power,pace,calhr,calories,heartrate,status\n')
     
     #Loop until workout has begun
     workout = erg.get_workout()
