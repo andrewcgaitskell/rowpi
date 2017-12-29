@@ -13,6 +13,27 @@
 import pyrow
 import time
 
+import psycopg2
+
+conn = psycopg2.connect('host=localhost user=andrew password=andrew dbname=data')
+
+query = """
+    insert into strokes.raw values %s
+    returning *
+"""
+#my_tuple = (2, 'b')
+
+#cursor.execute(query, (my_tuple,)) # Notice the comma after my_tuple
+#rs = cursor.fetchall()
+#conn.commit()
+#for row in rs:
+#    print row
+
+#cur = conn.cursor()
+
+#cur.execute('select * from people')
+
+
 if __name__ == '__main__':
 
     #Connecting to erg
@@ -73,11 +94,23 @@ if __name__ == '__main__':
         #forceplot_str = str(monitor['forceplot'])
         #strokestate_str = str(monitor['strokerate'])
         
+        # write data into database
+        
+        #sqlcmnd = "INSERT INTO strokes.raw('
+	    #sqlcmnd = sqlcmnd + 'time,distance, spm, power, pace, calhr, calories, heartrate, status)'
+	    #sqlcmnd = sqlcmnd + VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+        
+        
+        
         #Write data to write_file
         
         workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str)
         workoutdata = ','.join(workouttuple)
-
+        
+        cursor.execute(query, (workouttuple,))
+        conn.commit()
+        cursor.close()
+        
         write_file.write(workoutdata+'\n') 
         
         #workoutdata = str(monitor['time']) + "," + str(monitor['distance']) + "," + \
@@ -91,4 +124,8 @@ if __name__ == '__main__':
         workout = erg.get_workout()
 
     write_file.close()
+    
+    cur.close()
+    conn.close()
+    
     print "Workout has ended"
