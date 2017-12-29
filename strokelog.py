@@ -16,6 +16,7 @@ import time
 import psycopg2
 
 conn = psycopg2.connect('host=localhost user=andrew password=andrew dbname=data')
+cur = conn.cursor()
 
 query = """
     insert into strokes.raw values %s
@@ -107,9 +108,8 @@ if __name__ == '__main__':
         workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str)
         workoutdata = ','.join(workouttuple)
         
-        cursor.execute(query, (workouttuple,))
+        cur.execute(query, (workouttuple,))
         conn.commit()
-        cursor.close()
         
         write_file.write(workoutdata+'\n') 
         
