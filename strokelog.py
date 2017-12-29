@@ -71,73 +71,73 @@ if __name__ == '__main__':
             #forceplot = erg.get_force_plot()
             workout = erg.get_workout()
 
-		#Record force data during the drive
-		force = forceplot['forceplot'] #start of pull (when strokestate first changed to 2)
-		monitor = erg.get_monitor() #get monitor data for start of stroke
-		#Loop during drive
-		#while forceplot['strokestate'] == 2:
-		    #ToDo: sleep?
-		    #forceplot = erg.get_force_plot()
-		    #force.extend(forceplot['forceplot'])
+	#Record force data during the drive
+	force = forceplot['forceplot'] #start of pull (when strokestate first changed to 2)
+	monitor = erg.get_monitor() #get monitor data for start of stroke
+	#Loop during drive
+	#while forceplot['strokestate'] == 2:
+	    #ToDo: sleep?
+	    #forceplot = erg.get_force_plot()
+	    #force.extend(forceplot['forceplot'])
 
-		#forceplot = erg.get_force_plot()
-		#force.extend(forceplot['forceplot'])
+	#forceplot = erg.get_force_plot()
+	#force.extend(forceplot['forceplot'])
 
-		#Write data to write_file
+	#Write data to write_file
 
-		time_str = str(monitor['time'])
-		distance_str = str(monitor['distance'])
-		spm_str = str(monitor['spm'])
-		power_str = str(monitor['power'])
-		pace_str = str(monitor['pace'])
-		calhr_str = str(monitor['calhr'])
-		calories_str = str(monitor['calories'])
-		heartrate_str = str(monitor['heartrate'])
-		status_str = str(monitor['status'])
+	time_str = str(monitor['time'])
+	distance_str = str(monitor['distance'])
+	spm_str = str(monitor['spm'])
+	power_str = str(monitor['power'])
+	pace_str = str(monitor['pace'])
+	calhr_str = str(monitor['calhr'])
+	calories_str = str(monitor['calories'])
+	heartrate_str = str(monitor['heartrate'])
+	status_str = str(monitor['status'])
 
-		time_float = float(time_str)
-		distance_float = float(distance_str)
-		spm_float = float(spm_str)
-		power_float = float(power_str)
-		pace_float = float(pace_str)
-		calhr_float = float(calhr_str)
-		calories_float = float(calories_str)
-		heartrate_float = float(heartrate_str)
-		status_float = float(status_str)
+	time_float = float(time_str)
+	distance_float = float(distance_str)
+	spm_float = float(spm_str)
+	power_float = float(power_str)
+	pace_float = float(pace_str)
+	calhr_float = float(calhr_str)
+	calories_float = float(calories_str)
+	heartrate_float = float(heartrate_str)
+	status_float = float(status_str)
 
-		workouttuple_float = (time_float,distance_float,spm_float,power_float,pace_float,calhr_float,calories_float,heartrate_float,status_float)
-
-
-		#forceplot_str = str(monitor['forceplot'])
-		#strokestate_str = str(monitor['strokerate'])
-
-		# write data into database
-
-		#sqlcmnd = "INSERT INTO strokes.raw('
-		    #sqlcmnd = sqlcmnd + 'time,distance, spm, power, pace, calhr, calories, heartrate, status)'
-		    #sqlcmnd = sqlcmnd + VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+	workouttuple_float = (time_float,distance_float,spm_float,power_float,pace_float,calhr_float,calories_float,heartrate_float,status_float)
 
 
+	#forceplot_str = str(monitor['forceplot'])
+	#strokestate_str = str(monitor['strokerate'])
 
-		#Write data to write_file
+	# write data into database
 
-		workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str)
-		workoutdata = ','.join(workouttuple)
+	#sqlcmnd = "INSERT INTO strokes.raw('
+	    #sqlcmnd = sqlcmnd + 'time,distance, spm, power, pace, calhr, calories, heartrate, status)'
+	    #sqlcmnd = sqlcmnd + VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
 
-		cur.execute(query, (workouttuple_float,))
-		conn.commit()
 
-		write_file.write(workoutdata+'\n') 
 
-		#workoutdata = str(monitor['time']) + "," + str(monitor['distance']) + "," + \
-		#    str(monitor['spm']) + "," + str(monitor['pace']) + ","
+	#Write data to write_file
 
-		#forcedata = ",".join([str(f) for f in force])
-		#write_file.write(workoutdata + forcedata + '\n')
-		#write_file.write(workoutdata + '\n')
+	workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str)
+	workoutdata = ','.join(workouttuple)
 
-		#Get workout conditions
-		workout = erg.get_workout()
+	cur.execute(query, (workouttuple_float,))
+	conn.commit()
+
+	write_file.write(workoutdata+'\n') 
+
+	#workoutdata = str(monitor['time']) + "," + str(monitor['distance']) + "," + \
+	#    str(monitor['spm']) + "," + str(monitor['pace']) + ","
+
+	#forcedata = ",".join([str(f) for f in force])
+	#write_file.write(workoutdata + forcedata + '\n')
+	#write_file.write(workoutdata + '\n')
+
+	#Get workout conditions
+	workout = erg.get_workout()
         stroke_counter = stroke_counter + 1
         print stroke_counter
 
