@@ -14,6 +14,8 @@ import pyrow
 import time
 
 import psycopg2
+import datetime
+
 
 conn = psycopg2.connect('host=localhost user=andrew password=andrew dbname=data')
 cur = conn.cursor()
@@ -58,6 +60,7 @@ if __name__ == '__main__':
         time.sleep(1)
         workout = erg.get_workout()
     print "Workout has begun"
+    rowingid = datetime.datetime.utcnow().isoformat()
 
     stroke_counter = 0
     
@@ -102,7 +105,7 @@ if __name__ == '__main__':
         heartrate_float = float(heartrate_str)
         status_float = float(status_str)
 
-        workouttuple_float = (time_float,distance_float,spm_float,power_float,pace_float,calhr_float,calories_float,heartrate_float,status_float)
+        workouttuple_float = (time_float,distance_float,spm_float,power_float,pace_float,calhr_float,calories_float,heartrate_float,status_float,rowingid)
 
 
         #forceplot_str = str(monitor['forceplot'])
