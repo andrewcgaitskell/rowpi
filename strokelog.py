@@ -19,7 +19,7 @@ conn = psycopg2.connect('host=localhost user=andrew password=andrew dbname=data'
 cur = conn.cursor()
 
 query = """
-    insert into strokes.raw values %s
+    insert into strokes.floats values %s
     returning *
 """
 #my_tuple = (2, 'b')
@@ -122,7 +122,7 @@ if __name__ == '__main__':
         workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str)
         workoutdata = ','.join(workouttuple)
         
-        cur.execute(query, (workouttuple,))
+        cur.execute(query, (workouttuple_float,))
         conn.commit()
         
         write_file.write(workoutdata+'\n') 
