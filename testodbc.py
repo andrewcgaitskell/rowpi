@@ -24,8 +24,8 @@ conn.close()
 
 engine = create_engine('postgresql://andrew:andrew@localhost:5432/data')
 
-sql.execute('SELECT stroketime, distance, spm, power, pace, calhr, calories, heartrate, status, rowingid FROM strokes.floats;', engine)
+sqlcmnd = 'SELECT stroketime, distance, spm, power, pace, calhr, calories, heartrate, status, rowingid FROM strokes.floats;'
 
+df = pd.read_sql_query(sqlcmnd, engine)
 
-
-pd.read_sql_query('SELECT * FROM data', engine)
+print df
