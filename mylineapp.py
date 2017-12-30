@@ -31,7 +31,7 @@ my_times = df["stroketime"].tolist()
 my_distances = df["distance"].tolist()
 
 # add a line renderer
-p.line(my_times, my_distances, line_width=2)
+# p.line(my_times, my_distances, line_width=2)
 
 #toy_df = pd.DataFrame(data=np.random.rand(5,3), columns = ('a', 'b' ,'c'), index = pd.DatetimeIndex(start='01-01-2015',periods=5, freq='d'))   
 
