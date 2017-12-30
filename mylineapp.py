@@ -74,7 +74,7 @@ def RefreshData():
 #           text_baseline="middle", text_align="center")
 
 newx,newy,mypalette = RefreshData()
-source = ColumnDataSource(dict(xs=newx, ys=newx))
+source = ColumnDataSource(data = dict(xs=newx, ys=newx))
 
 r = p.multi_line(xs=[], ys=[], source=source, color=[] , line_width=4)
 
@@ -86,7 +86,7 @@ ds = r.data_source
 def callback():
     newx,newy,mypalette = RefreshData()
     source = ColumnDataSource(dict(xs=newx, ys=newx))
-    source.data = dict(x=xs, ys=ys)
+    p.multi_line(x='stroketime', y='distance', source=source, color=mypalette , line_width=4)
 
 # add a button widget and configure with the call back
 button = Button(label="Press Me")
