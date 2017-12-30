@@ -35,10 +35,27 @@ my_distances = df["distance"].tolist()
 
 #toy_df = pd.DataFrame(data=np.random.rand(5,3), columns = ('a', 'b' ,'c'), index = pd.DatetimeIndex(start='01-01-2015',periods=5, freq='d'))   
 
-newx = list(df["stroketime"].groupby(df["rowingid"]))
-newy = list(df["distance"].groupby(df["rowingid"]))
+#newx = list(df["stroketime"].groupby(df["rowingid"]))
+#newy = list(df["distance"].groupby(df["rowingid"]))
 
+newx = []
+newy = []
 
+# Group the dataframe by regiment, and for each regiment,
+for stroketime, group in df.groupby('rowingid'): 
+    # print the name of the regiment
+    # print(name)
+    # print the data of that regiment
+    my_group_times = group["stroketime"].tolist()
+    newx.append(my_group_times)
+
+for distance, group in df.groupby('rowingid'): 
+    # print the name of the regiment
+    # print(name)
+    # print the data of that regiment
+    my_group_distances = group['distance'].tolist()
+    newy.append(my_group_distances)
+    
 p.multi_line(newx, newy,
              color=["firebrick"], alpha=[0.8], line_width=4)
 
