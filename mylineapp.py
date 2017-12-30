@@ -5,6 +5,7 @@ from random import random
 from bokeh.layouts import column
 from bokeh.models import Button
 from bokeh.palettes import RdYlBu3
+from bokeh.palettes import Spectral11
 from bokeh.plotting import figure, curdoc
 
 from sqlalchemy import create_engine
@@ -14,7 +15,7 @@ from pandas.io import sql
 # create a plot and style its properties
 p = figure(plot_width=400, plot_height=400,x_range=(0, 100), y_range=(0, 100), toolbar_location=None)
 p.border_fill_color = 'white'
-p.background_fill_color = 'red'
+p.background_fill_color = 'white'
 p.outline_line_color = 'black'
 p.grid.grid_line_color = 'black'
 
@@ -57,9 +58,14 @@ for distance, group in df.groupby('rowingid'):
     newy.append(my_group_distances)
     
 line_colors = ["red","orange","yellow"]
-    
+
+listofrows = df['rowingid'].unique()
+
+numlines=len(listofrows)
+mypalette=Spectral11[0:numlines]
+
 p.multi_line(newx, newy,
-             color=line_colors , line_width=4)
+             color=mypalette , line_width=4)
 
 # add a text renderer to our plot (no data yet)
 r = p.text(x=[], y=[], text=[], text_color=[], text_font_size="20pt",
