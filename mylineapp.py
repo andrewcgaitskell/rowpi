@@ -57,8 +57,6 @@ for distance, group in df.groupby('rowingid'):
     my_group_distances = group['distance'].tolist()
     newy.append(my_group_distances)
     
-line_colors = ["red","orange","yellow"]
-
 listofrows = df['rowingid'].unique()
 
 numlines=len(listofrows)
