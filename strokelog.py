@@ -16,6 +16,14 @@ import time
 import psycopg2
 import datetime
 
+from sqlalchemy import create_engine
+
+import pandas as pd
+
+from pandas.io import sql
+
+engine = create_engine('postgresql://andrew:andrew@localhost:5432/data')
+sqlcmnd_data = 'SELECT stroketime, distance, spm, power, pace, calhr, calories, heartrate, status, rowingid FROM strokes.floats;'
 
 conn = psycopg2.connect('host=localhost user=andrew password=andrew dbname=data')
 cur = conn.cursor()
@@ -132,6 +140,8 @@ if __name__ == '__main__':
         workout = erg.get_workout()
         stroke_counter = stroke_counter + 1
         print stroke_counter
+        
+        #df = pd.read_sql_query(sqlcmnd_data, engine)
 
 write_file.close()
 
@@ -139,3 +149,7 @@ cur.close()
 conn.close()
 
 print "Workout has ended"
+
+
+
+
