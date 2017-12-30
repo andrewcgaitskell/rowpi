@@ -33,8 +33,14 @@ my_distances = df["distance"].tolist()
 # add a line renderer
 p.line(my_times, my_distances, line_width=2)
 
-p.multi_line([[1, 3, 2], [3, 4, 6, 6]], [[2, 1, 4], [4, 7, 8, 5]],
-             color=["firebrick", "navy"], alpha=[0.8, 0.3], line_width=4)
+#toy_df = pd.DataFrame(data=np.random.rand(5,3), columns = ('a', 'b' ,'c'), index = pd.DatetimeIndex(start='01-01-2015',periods=5, freq='d'))   
+
+newx = list(df["stroketime"].groupby(df["rowingid"]))
+newy = list(df["distance"].groupby(df["rowingid"]))
+
+
+p.multi_line(newx, newy,
+             color=["firebrick"], alpha=[0.8], line_width=4)
 
 # add a text renderer to our plot (no data yet)
 r = p.text(x=[], y=[], text=[], text_color=[], text_font_size="20pt",
