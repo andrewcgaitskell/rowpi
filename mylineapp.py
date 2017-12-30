@@ -56,8 +56,10 @@ for distance, group in df.groupby('rowingid'):
     my_group_distances = group['distance'].tolist()
     newy.append(my_group_distances)
     
+line_colors = ["red","orange","yellow"]
+    
 p.multi_line(newx, newy,
-             color=["firebrick"], alpha=[0.8], line_width=4)
+             color=line_colors , line_width=4)
 
 # add a text renderer to our plot (no data yet)
 r = p.text(x=[], y=[], text=[], text_color=[], text_font_size="20pt",
