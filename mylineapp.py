@@ -7,6 +7,10 @@ from bokeh.models import Button
 from bokeh.palettes import RdYlBu3
 from bokeh.plotting import figure, curdoc
 
+from sqlalchemy import create_engine
+import pandas as pd
+from pandas.io import sql
+
 # create a plot and style its properties
 p = figure(plot_width=400, plot_height=400,x_range=(0, 100), y_range=(0, 100), toolbar_location=None)
 p.border_fill_color = 'white'
@@ -14,8 +18,20 @@ p.background_fill_color = 'red'
 p.outline_line_color = 'black'
 p.grid.grid_line_color = 'black'
 
+engine = create_engine('postgresql://andrew:andrew@localhost:5432/data')
+
+#sqlcmnd = 'SELECT stroketime, distance, spm, power, pace, calhr, calories, heartrate, status, rowingid FROM strokes.floats;'
+
+sqlcmnd = 'SELECT stroketime, distance,rowingid FROM strokes.floats;'
+df = pd.read_sql_query(sqlcmnd, engine)
+
+#print df
+
+my_times = df["stroketime"].tolist()
+my_distances = df["distance"].tolist()
+
 # add a line renderer
-p.line([1, 2, 3, 4, 5], [6, 7, 2, 4, 5], line_width=2)
+p.line(my_times, my_distances, line_width=2)
 
 p.multi_line([[1, 3, 2], [3, 4, 6, 6]], [[2, 1, 4], [4, 7, 8, 5]],
              color=["firebrick", "navy"], alpha=[0.8, 0.3], line_width=4)
