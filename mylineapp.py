@@ -73,20 +73,18 @@ def RefreshData():
 #r = p.text(x=[], y=[], text=[], text_color=[], text_font_size="20pt",
 #           text_baseline="middle", text_align="center")
 
-newx,newy,mypalette = RefreshData()
-source = ColumnDataSource(data = dict(xs=newx, ys=newx))
-
-r = p.multi_line(xs=[], ys=[], source=source, color=[] , line_width=4)
-
-i = 0
-
-ds = r.data_source
-
 # create a callback that will add a number in a random location
 def callback():
     newx,newy,mypalette = RefreshData()
     source = ColumnDataSource(dict(xs=newx, ys=newx))
     p.multi_line(x='stroketime', y='distance', source=source, color=mypalette , line_width=4)
+
+    
+
+newx,newy,mypalette = RefreshData()
+source = ColumnDataSource(data = dict(xs=newx, ys=newx))
+r = p.multi_line(x='stroketime', y='distance', source=source, color=mypalette , line_width=4)
+
 
 # add a button widget and configure with the call back
 button = Button(label="Press Me")
