@@ -19,55 +19,61 @@ p.background_fill_color = 'white'
 p.outline_line_color = 'black'
 p.grid.grid_line_color = 'black'
 
-engine = create_engine('postgresql://andrew:andrew@localhost:5432/data')
+def RefreshData():
+    engine = create_engine('postgresql://andrew:andrew@localhost:5432/data')
 
-#sqlcmnd = 'SELECT stroketime, distance, spm, power, pace, calhr, calories, heartrate, status, rowingid FROM strokes.floats;'
+    #sqlcmnd = 'SELECT stroketime, distance, spm, power, pace, calhr, calories, heartrate, status, rowingid FROM strokes.floats;'
 
-sqlcmnd = 'SELECT stroketime, distance,rowingid FROM strokes.floats;'
-df = pd.read_sql_query(sqlcmnd, engine)
+    sqlcmnd = 'SELECT stroketime, distance,rowingid FROM strokes.floats;'
+    df = pd.read_sql_query(sqlcmnd, engine)
 
-#print df
+    #print df
 
-my_times = df["stroketime"].tolist()
-my_distances = df["distance"].tolist()
+    #my_times = df["stroketime"].tolist()
+    #my_distances = df["distance"].tolist()
 
-# add a line renderer
-# p.line(my_times, my_distances, line_width=2)
+    # add a line renderer
+    # p.line(my_times, my_distances, line_width=2)
 
-#toy_df = pd.DataFrame(data=np.random.rand(5,3), columns = ('a', 'b' ,'c'), index = pd.DatetimeIndex(start='01-01-2015',periods=5, freq='d'))   
+    #toy_df = pd.DataFrame(data=np.random.rand(5,3), columns = ('a', 'b' ,'c'), index = pd.DatetimeIndex(start='01-01-2015',periods=5, freq='d'))   
 
-#newx = list(df["stroketime"].groupby(df["rowingid"]))
-#newy = list(df["distance"].groupby(df["rowingid"]))
+    #newx = list(df["stroketime"].groupby(df["rowingid"]))
+    #newy = list(df["distance"].groupby(df["rowingid"]))
 
-newx = []
-newy = []
+    newx_out = []
+    newy_out = []
 
-# Group the dataframe by regiment, and for each regiment,
-for stroketime, group in df.groupby('rowingid'): 
-    # print the name of the regiment
-    # print(name)
-    # print the data of that regiment
-    my_group_times = group["stroketime"].tolist()
-    newx.append(my_group_times)
+    # Group the dataframe by regiment, and for each regiment,
+    for stroketime, group in df.groupby('rowingid'): 
+        # print the name of the regiment
+        # print(name)
+        # print the data of that regiment
+        my_group_times = group["stroketime"].tolist()
+        newx_out.append(my_group_times)
 
-for distance, group in df.groupby('rowingid'): 
-    # print the name of the regiment
-    # print(name)
-    # print the data of that regiment
-    my_group_distances = group['distance'].tolist()
-    newy.append(my_group_distances)
+    for distance, group in df.groupby('rowingid'): 
+        # print the name of the regiment
+        # print(name)
+        # print the data of that regiment
+        my_group_distances = group['distance'].tolist()
+        newy_out.append(my_group_distances)
+
+    listofrows = df['rowingid'].unique()
+
+    numlines=len(listofrows)
+    mypalette_out=Spectral11[0:numlines]
     
-listofrows = df['rowingid'].unique()
+    return newx_out,newy_out,mypalette_out
 
-numlines=len(listofrows)
-mypalette=Spectral11[0:numlines]
-
-p.multi_line(newx, newy,
-             color=mypalette , line_width=4)
+#p.multi_line(newx, newy,
+#             color=mypalette , line_width=4)
 
 # add a text renderer to our plot (no data yet)
-r = p.text(x=[], y=[], text=[], text_color=[], text_font_size="20pt",
-           text_baseline="middle", text_align="center")
+#r = p.text(x=[], y=[], text=[], text_color=[], text_font_size="20pt",
+#           text_baseline="middle", text_align="center")
+
+r = p.multi_line(x=[], y=[],
+             color=[] , line_width=4)
 
 i = 0
 
@@ -79,13 +85,15 @@ def callback():
 
     # BEST PRACTICE --- update .data in one step with a new dict
     new_data = dict()
-    new_data['x'] = ds.data['x'] + [random()*70 + 15]
-    new_data['y'] = ds.data['y'] + [random()*70 + 15]
-    new_data['text_color'] = ds.data['text_color'] + [RdYlBu3[i%3]]
-    new_data['text'] = ds.data['text'] + [str(i)]
+    #new_data['x'] = ds.data['x'] + [random()*70 + 15]
+    #new_data['y'] = ds.data['y'] + [random()*70 + 15]
+    #new_data['text_color'] = ds.data['text_color'] + [RdYlBu3[i%3]]
+    #new_data['text'] = ds.data['text'] + [str(i)]
+    newx,newy,mypalette = RefreshData()
+    new_data['x'] = newx
+    new_data['y'] = newy
+    new_data['color'] = mypalette
     ds.data = new_data
-
-    i = i + 1
 
 # add a button widget and configure with the call back
 button = Button(label="Press Me")
