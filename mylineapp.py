@@ -72,8 +72,7 @@ def RefreshData():
 #r = p.text(x=[], y=[], text=[], text_color=[], text_font_size="20pt",
 #           text_baseline="middle", text_align="center")
 
-r = p.multi_line(x=[], y=[],
-             color=[] , line_width=4)
+r = p.multi_line(x=[], y=[], color=[] , line_width=4)
 
 i = 0
 
