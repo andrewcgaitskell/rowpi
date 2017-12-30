@@ -4,6 +4,7 @@ from random import random
 
 from bokeh.layouts import column
 from bokeh.models import Button
+from bokeh.models import ColumnDataSource
 from bokeh.palettes import RdYlBu3
 from bokeh.palettes import Spectral11
 from bokeh.plotting import figure, curdoc
