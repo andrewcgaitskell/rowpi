@@ -71,7 +71,7 @@ i = 0
 
 for lor in listofrows:
     source = ColumnDataSource(dict(x=newx_out[i], y=newy_out[i]))
-    lineglyph =  Line(x=x, y=y, line_color=mypalette[i], line_width=6, line_alpha=0.6)
+    lineglyph =  Line(x="x", y="y", line_color=str(mypalette[i]), line_width=6, line_alpha=0.6)
     plot.add_glyph(lineglyph,source)
     i = i + 1
 
