@@ -84,13 +84,10 @@ def RefreshData():
 df,newx,newy = RefreshData()
 #source = ColumnDataSource(df)
 
-print dict(
-        xs=newx,
-        ys=newy,)
 
 source = ColumnDataSource(dict(
-        xs=newx,
-        ys=newy,
+        stroketime=newx,
+        distance=newy,
     )
 )
 
@@ -101,7 +98,7 @@ plot = Plot(
     title=None, x_range=xdr, y_range=ydr, plot_width=300, plot_height=300,
     h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
 
-glyph = MultiLine(xs="xs", ys="ys", line_color="#8073ac", line_width=2)
+glyph = MultiLine(xs="stroketime", ys="distance", line_color="#8073ac", line_width=2)
 plot.add_glyph(source, glyph)
 
 xaxis = LinearAxis()
