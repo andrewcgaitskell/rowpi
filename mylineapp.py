@@ -64,7 +64,13 @@ def RefreshData():
     mypalette_wking=Spectral11[0:numlines]
     mypalette_out = mypalette_wking
     
-    return df_out, newx_out,newy_out,mypalette_out
+    colorlookup = zip(listofrows, mypalette_wking)
+    
+    colordf = pd.DataFrame(colorlookup,columns = ['rowingid','colorofline'])
+    
+    newdf = pd.merge(df_out, colordf, on='rowingid', how='inner')
+    
+    return newdf, newx_out,newy_out,mypalette_out
 
 #p.multi_line(newx, newy,
 #             color=mypalette , line_width=4)
@@ -82,17 +88,14 @@ def RefreshData():
     
 
 df,newx,newy,mypalette = RefreshData()
-#source = ColumnDataSource(df)
+source = ColumnDataSource(df)
 
 
-source = ColumnDataSource(dict(
-        stroketime=newx,
-        distance=newy,
-    )
-)
-
-source2 = ColumnDataSource(data = dict(color = mypalette, stroketime = newx, distance = newy))
-
+#source = ColumnDataSource(dict(
+#        stroketime=newx,
+#        distance=newy,
+#    )
+#)
 
 
 xdr = DataRange1d()
@@ -103,9 +106,9 @@ plot = Plot(
     h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
 
 
-glyph2 = MultiLine('stroketime','distance',source = source2, line_color = 'color')
+glyph2 = MultiLine('stroketime','distance',source = source2, line_color = 'colorofline')
 
-glyph = MultiLine(xs="stroketime", ys="distance", line_color="#8073ac", line_width=2)
+#glyph = MultiLine(xs="stroketime", ys="distance", line_color="#8073ac", line_width=2)
 
 #plot.add_glyph(source, glyph)
 
