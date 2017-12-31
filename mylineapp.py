@@ -87,8 +87,6 @@ def RefreshData():
 
     
 
-df,newx,newy,mypalette = RefreshData()
-source = ColumnDataSource(df)
 
 
 #source = ColumnDataSource(dict(
@@ -102,12 +100,15 @@ xdr = DataRange1d()
 ydr = DataRange1d()
 
 plot = Plot(
-    title=None, x_range=xdr, y_range=ydr, plot_width=300, plot_height=300,
+    title="My Rowing", x_range=xdr, y_range=ydr, plot_width=100, plot_height=100,
     h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
 
 print df
 
 #glyph2 = MultiLine(df['stroketime'],df['distance'],source = source, line_color = df['colorofline'])
+
+df,newx,newy,mypalette = RefreshData()
+source = ColumnDataSource(df)
 
 glyph = MultiLine(xs="stroketime", ys="distance", line_color="red", line_width=6)
 
@@ -124,7 +125,7 @@ plot.add_layout(yaxis, 'left')
 plot.add_layout(Grid(dimension=0, ticker=xaxis.ticker))
 plot.add_layout(Grid(dimension=1, ticker=yaxis.ticker))
 
-curdoc().add_root(column(plot))
+curdoc().add_root(plot)
 
 #show(plot)
 
