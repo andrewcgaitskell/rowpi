@@ -114,7 +114,7 @@ mysource = ColumnDataSource(df)
 #lineglyph =  Line(x="stroketime", y="distance", line_color="#f46d43", line_width=6, line_alpha=0.6)
 #plot.add_glyph(mysource, lineglyph)
 
-myglyph = MultiLine(xs=newx, ys=newy, line_color="#f46d43", line_width=6)
+myglyph = MultiLine(xs="stroketime", ys="distance", line_color="#f46d43", line_width=6)
 plot.add_glyph(mysource, myglyph)
 
 #xaxis = LinearAxis()
