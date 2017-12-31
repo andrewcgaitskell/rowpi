@@ -13,6 +13,7 @@ from bokeh.palettes import RdYlBu3
 from bokeh.palettes import Spectral11
 from bokeh.plotting import figure, curdoc
 from bokeh.models.glyphs import MultiLine
+from bokeh.io import curdoc, show
 
 from sqlalchemy import create_engine
 import pandas as pd
