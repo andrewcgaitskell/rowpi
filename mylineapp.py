@@ -13,6 +13,7 @@ from bokeh.palettes import RdYlBu3
 from bokeh.palettes import Spectral11
 from bokeh.plotting import figure, curdoc
 from bokeh.models.glyphs import MultiLine
+from bokeh.models.glyphs import Line
 from bokeh.io import curdoc, show
 
 from sqlalchemy import create_engine
@@ -109,9 +110,12 @@ df,newx,newy,mypalette = RefreshData()
 print df
 mysource = ColumnDataSource(df)
 
-myglyph = MultiLine(xs='stroketime', ys='distance')#, line_color='colorofline', line_width=6)
+lineglyph =  Line(x="stroketime", y="distance", line_color="#f46d43", line_width=6, line_alpha=0.6)
+plot.add_glyph(mysource, lineglyph)
 
-plot.add_glyph(mysource, myglyph)
+#myglyph = MultiLine(xs='stroketime', ys='distance')#, line_color='colorofline', line_width=6)
+
+#plot.add_glyph(mysource, myglyph)
 
 #xaxis = LinearAxis()
 #plot.add_layout(xaxis, 'below')
