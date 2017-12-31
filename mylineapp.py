@@ -68,9 +68,9 @@ def RefreshData():
 
     numlines=len(listofrows)
     mypalette_wking=Spectral11[0:numlines]
-    mypalette_out = dict(mypalette_wking)
+    #mypalette_out = dict(mypalette_wking)
     
-    return df_out, newx_out,newy_out,mypalette_out
+    return df_out, newx_out,newy_out#,mypalette_out
 
 #p.multi_line(newx, newy,
 #             color=mypalette , line_width=4)
@@ -103,7 +103,7 @@ plot = Plot(
     title=None, x_range=xdr, y_range=ydr, plot_width=300, plot_height=300,
     h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
 
-glyph = MultiLine(xs="stroketime", ys="distance", line_color=mypalette, line_width=2)
+glyph = MultiLine(xs="stroketime", ys="distance", line_color=line_color="#8073ac", line_width=2)
 plot.add_glyph(source, glyph)
 
 xaxis = LinearAxis()
