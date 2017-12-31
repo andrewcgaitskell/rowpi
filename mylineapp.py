@@ -103,12 +103,12 @@ plot = Plot(
     title=None, x_range=xdr, y_range=ydr, plot_width=100, plot_height=100,
     h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
 
-print df
-
 #glyph2 = MultiLine(df['stroketime'],df['distance'],source = source, line_color = df['colorofline'])
 
 df,newx,newy,mypalette = RefreshData()
 source = ColumnDataSource(df)
+
+print source
 
 glyph = MultiLine(xs="stroketime", ys="distance", line_color="red", line_width=6)
 
