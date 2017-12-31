@@ -70,6 +70,8 @@ def RefreshData():
     
     newdf = pd.merge(df_out, colordf, on='rowingid', how='inner')
     
+    newdf.rename({1: "xs", 2: "ys", 3: "rowingid", 4: "color"}, axis='index')
+    
     return newdf, newx_out,newy_out,mypalette_out
 
 #p.multi_line(newx, newy,
@@ -110,7 +112,7 @@ print df
 source = ColumnDataSource(df)
 
 
-glyph = MultiLine(xs='stroketime', ys='distance', line_color='colorofline', line_width=6)
+glyph = MultiLine(xs='xs', ys='ys', line_color='color', line_width=6)
 
 #plot.add_glyph(source, glyph)
 
