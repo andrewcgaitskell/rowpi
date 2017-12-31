@@ -110,7 +110,7 @@ source = ColumnDataSource(df)
 
 print source
 
-glyph = MultiLine(xs="stroketime", ys="distance", line_color="red", line_width=6)
+glyph = MultiLine(xs="stroketime", ys="distance", line_color='#3288bd', line_width=6)
 
 #plot.add_glyph(source, glyph)
 
