@@ -105,14 +105,15 @@ plot = Plot(
     title=None, x_range=xdr, y_range=ydr, plot_width=300, plot_height=300,
     h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
 
+print df
 
-glyph2 = MultiLine(df['stroketime'],df['distance'],source = source, line_color = df['colorofline'])
-
+#glyph2 = MultiLine(df['stroketime'],df['distance'],source = source, line_color = df['colorofline'])
+glyph2 = MultiLine(df)
 #glyph = MultiLine(xs="stroketime", ys="distance", line_color="#8073ac", line_width=2)
 
 #plot.add_glyph(source, glyph)
 
-plot.add_glyph(source2, glyph2)
+plot.add_glyph(source, glyph2)
 
 xaxis = LinearAxis()
 plot.add_layout(xaxis, 'below')
