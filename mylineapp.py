@@ -82,7 +82,13 @@ def RefreshData():
     
 
 df,newx,newy = RefreshData()
-source = ColumnDataSource(df)
+#source = ColumnDataSource(df)
+
+source = ColumnDataSource(dict(
+        xs=newx,
+        ys=newy,
+    )
+)
 
 xdr = DataRange1d()
 ydr = DataRange1d()
