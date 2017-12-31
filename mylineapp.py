@@ -100,7 +100,7 @@ xdr = DataRange1d()
 ydr = DataRange1d()
 
 plot = Plot(
-    title=None, x_range=xdr, y_range=ydr, plot_width=100, plot_height=100,
+    title=None, x_range=xdr, y_range=ydr, plot_width=500, plot_height=500,
     h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
 
 #glyph2 = MultiLine(df['stroketime'],df['distance'],source = source, line_color = df['colorofline'])
@@ -109,9 +109,9 @@ df,newx,newy,mypalette = RefreshData()
 print df
 source = ColumnDataSource(df)
 
-glyph = MultiLine(xs='stroketime', ys='distance', line_color='colorofline', line_width=6)
+myglyph = MultiLine(xs='stroketime', ys='distance', line_color='colorofline', line_width=6)
 
-plot.add_glyph(source, glyph)
+plot.add_glyph(source=source, glyph=myglyph)
 
 xaxis = LinearAxis()
 plot.add_layout(xaxis, 'below')
