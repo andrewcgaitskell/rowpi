@@ -87,8 +87,8 @@ df,newx,newy,mypalette = RefreshData()
 #source = ColumnDataSource(df)
 
 source = ColumnDataSource(dict(
-        xs=newxs,
-        ys=newys,
+        xs=newx,
+        ys=newy,
     )
 )
 
