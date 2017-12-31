@@ -26,7 +26,7 @@ def RefreshData():
     #sqlcmnd = 'SELECT stroketime, distance, spm, power, pace, calhr, calories, heartrate, status, rowingid FROM strokes.floats;'
 
     sqlcmnd = 'SELECT stroketime, distance,rowingid FROM strokes.floats;'
-    df = pd.read_sql_query(sqlcmnd, engine)
+    df_out = pd.read_sql_query(sqlcmnd, engine)
 
     #print df
 
@@ -45,26 +45,26 @@ def RefreshData():
     newy_out = []
 
     # Group the dataframe by regiment, and for each regiment,
-    for stroketime, group in df.groupby('rowingid'): 
+    for stroketime, group in df_out.groupby('rowingid'): 
         # print the name of the regiment
         # print(name)
         # print the data of that regiment
         my_group_times = group["stroketime"].tolist()
         newx_out.append(my_group_times)
 
-    for distance, group in df.groupby('rowingid'): 
+    for distance, group in df_out.groupby('rowingid'): 
         # print the name of the regiment
         # print(name)
         # print the data of that regiment
         my_group_distances = group['distance'].tolist()
         newy_out.append(my_group_distances)
 
-    listofrows = df['rowingid'].unique()
+    listofrows = df_out['rowingid'].unique()
 
     numlines=len(listofrows)
     mypalette_out=Spectral11[0:numlines]
     
-    return newx_out,newy_out,mypalette_out
+    return df_out, newx_out,newy_out,mypalette_out
 
 #p.multi_line(newx, newy,
 #             color=mypalette , line_width=4)
@@ -74,15 +74,15 @@ def RefreshData():
 #           text_baseline="middle", text_align="center")
 
 # create a callback that will add a number in a random location
-def callback():
-    newx,newy,mypalette = RefreshData()
-    source = ColumnDataSource(dict(xs=newx, ys=newx))
-    p.multi_line(x='stroketime', y='distance', source=source, color=mypalette , line_width=4)
+#def callback():
+#    newx,newy,mypalette = RefreshData()
+#    source = ColumnDataSource(dict(xs=newx, ys=newx))
+#    p.multi_line(x='stroketime', y='distance', source=source, color=mypalette , line_width=4)
 
     
 
-newx,newy,mypalette = RefreshData()
-source = ColumnDataSource(data = dict(xs=newx, ys=newx))
+df,newx,newy,mypalette = RefreshData()
+source = ColumnDataSource(df)
 r = p.multi_line(x='stroketime', y='distance', source=source, color=mypalette , line_width=4)
 
 
