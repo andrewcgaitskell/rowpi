@@ -106,7 +106,7 @@ plot = Plot(
 #glyph2 = MultiLine(df['stroketime'],df['distance'],source = source, line_color = df['colorofline'])
 
 df,newx,newy,mypalette = RefreshData()
-source = ColumnDataSource(df)
+source = ColumnDataSource(data=df)
 
 print source
 
