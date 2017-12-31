@@ -100,7 +100,7 @@ xdr = DataRange1d()
 ydr = DataRange1d()
 
 plot = Plot(
-    title="My Rowing", x_range=xdr, y_range=ydr, plot_width=100, plot_height=100,
+    title=None, x_range=xdr, y_range=ydr, plot_width=100, plot_height=100,
     h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
 
 print df
