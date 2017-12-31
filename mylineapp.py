@@ -19,13 +19,6 @@ from sqlalchemy import create_engine
 import pandas as pd
 from pandas.io import sql
 
-# create a plot and style its properties
-p = figure(plot_width=400, plot_height=400,x_range=(0, 100), y_range=(0, 100), toolbar_location=None)
-p.border_fill_color = 'white'
-p.background_fill_color = 'white'
-p.outline_line_color = 'black'
-p.grid.grid_line_color = 'black'
-
 def RefreshData():
     engine = create_engine('postgresql://andrew:andrew@localhost:5432/data')
 
@@ -90,12 +83,6 @@ def RefreshData():
 
 df,newx,newy = RefreshData()
 source = ColumnDataSource(df)
-
-#source = ColumnDataSource(dict(
-#        xs=newx,
-#        ys=newy,
-#    )
-#)
 
 xdr = DataRange1d()
 ydr = DataRange1d()
