@@ -4,10 +4,12 @@ from random import random
 
 from bokeh.layouts import column
 from bokeh.models import Button
+from bokeh.models import DataRange1d
 from bokeh.models import ColumnDataSource
 from bokeh.palettes import RdYlBu3
 from bokeh.palettes import Spectral11
 from bokeh.plotting import figure, curdoc
+from bokeh.models.glyphs import MultiLine
 
 from sqlalchemy import create_engine
 import pandas as pd
@@ -82,13 +84,41 @@ def RefreshData():
     
 
 df,newx,newy,mypalette = RefreshData()
-source = ColumnDataSource(df)
-r = p.multi_line(x='stroketime', y='distance', source=source, color=mypalette , line_width=4)
+#source = ColumnDataSource(df)
+
+source = ColumnDataSource(dict(
+        xs=newxs,
+        ys=newys,
+    )
+)
+
+xdr = DataRange1d()
+ydr = DataRange1d()
+
+plot = Plot(
+    title=None, x_range=xdr, y_range=ydr, plot_width=300, plot_height=300,
+    h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
+
+glyph = MultiLine(xs="stroketime", ys="distance", line_color=mypalette, line_width=2)
+plot.add_glyph(source, glyph)
+
+xaxis = LinearAxis()
+plot.add_layout(xaxis, 'below')
+
+yaxis = LinearAxis()
+plot.add_layout(yaxis, 'left')
+
+plot.add_layout(Grid(dimension=0, ticker=xaxis.ticker))
+plot.add_layout(Grid(dimension=1, ticker=yaxis.ticker))
+
+curdoc().add_root(plot)
+
+show(plot)
 
 
 # add a button widget and configure with the call back
-button = Button(label="Press Me")
-button.on_click(callback)
+#button = Button(label="Press Me")
+#button.on_click(callback)
 
 # put the button and plot in a layout and add to the document
-curdoc().add_root(column(button, p))
+#curdoc().add_root(column(button, p))
