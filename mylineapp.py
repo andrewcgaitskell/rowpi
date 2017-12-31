@@ -109,7 +109,7 @@ df,newx,newy,mypalette = RefreshData()
 print df
 mysource = ColumnDataSource(df)
 
-myglyph = MultiLine(xs='stroketime', ys='distance', line_color='colorofline', line_width=6)
+myglyph = MultiLine(xs='stroketime', ys='distance')#, line_color='colorofline', line_width=6)
 
 plot.add_glyph(mysource, myglyph)
 
