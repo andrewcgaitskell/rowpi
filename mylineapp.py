@@ -4,6 +4,9 @@ from random import random
 
 from bokeh.layouts import column
 from bokeh.models import Button
+from bokeh.models import Plot
+from bokeh.models import LinearAxis
+from bokeh.models import Grid
 from bokeh.models import DataRange1d
 from bokeh.models import ColumnDataSource
 from bokeh.palettes import RdYlBu3
