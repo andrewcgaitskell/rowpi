@@ -140,6 +140,12 @@ plot.add_layout(yaxis, 'left')
 plot.add_layout(Grid(dimension=0, ticker=xaxis.ticker))
 plot.add_layout(Grid(dimension=1, ticker=yaxis.ticker))
 
+def update():
+    # updating a single column of the the *same length* is OK
+    plot.lineglyph.line_alpha = 1 
+
+curdoc().add_periodic_callback(update, 50)
+
 curdoc().add_root(plot)
 
 #show(plot)
