@@ -67,7 +67,8 @@ def RefreshData():
     listofrows = df_out['rowingid'].unique()
 
     numlines=len(listofrows)
-    mypalette_out=Spectral11[0:numlines]
+    mypalette_wking=Spectral11[0:numlines]
+    mypalette_out = dict(mypalette_wking)
     
     return df_out, newx_out,newy_out,mypalette_out
 
