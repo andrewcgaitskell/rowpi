@@ -93,7 +93,7 @@ source = ColumnDataSource(dict(
 
 source2 = ColumnDataSource(data = dict(color = mypalette, stroketime = newx, distance = newy))
 
-glyph2 = plot.multi_line('xs','ys',source = source2, line_color = 'color')
+
 
 xdr = DataRange1d()
 ydr = DataRange1d()
@@ -103,9 +103,10 @@ plot = Plot(
     h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
 
 
-
+glyph2 = plot.multi_line('xs','ys',source = source2, line_color = 'color')
 
 glyph = MultiLine(xs="stroketime", ys="distance", line_color="#8073ac", line_width=2)
+
 #plot.add_glyph(source, glyph)
 
 plot.add_glyph(source2, glyph2)
