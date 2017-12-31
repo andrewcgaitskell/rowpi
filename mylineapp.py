@@ -110,12 +110,12 @@ df,newx,newy,mypalette = RefreshData()
 print df
 mysource = ColumnDataSource(df)
 
-lineglyph =  Line(x="stroketime", y="distance", line_color="#f46d43", line_width=6, line_alpha=0.6)
-plot.add_glyph(mysource, lineglyph)
+## this line worked
+#lineglyph =  Line(x="stroketime", y="distance", line_color="#f46d43", line_width=6, line_alpha=0.6)
+#plot.add_glyph(mysource, lineglyph)
 
-#myglyph = MultiLine(xs='stroketime', ys='distance')#, line_color='colorofline', line_width=6)
-
-#plot.add_glyph(mysource, myglyph)
+myglyph = MultiLine(xs=newx, ys=newy, line_color="#f46d43", line_width=6)
+plot.add_glyph(mysource, myglyph)
 
 #xaxis = LinearAxis()
 #plot.add_layout(xaxis, 'below')
