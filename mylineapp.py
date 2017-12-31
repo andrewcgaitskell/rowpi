@@ -27,7 +27,7 @@ engine = create_engine('postgresql://andrew:andrew@localhost:5432/data')
 
 sqlcmnd = 'SELECT stroketime, distance,rowingid FROM strokes.floats;'
 
-while true:
+while True:
     reset_output()
     
     df_out = pd.read_sql_query(sqlcmnd, engine)
