@@ -70,9 +70,9 @@ def RefreshData():
     
     newdf = pd.merge(df_out, colordf, on='rowingid', how='inner')
     
-    newdf.rename({1: "xs", 2: "ys", 3: "rowingid", 4: "color"}, axis='index')
+    returndf = newdf.rename({1: "xs", 2: "ys", 3: "rowingid", 4: "color"}, axis='index')
     
-    return newdf, newx_out,newy_out,mypalette_out
+    return returndf, newx_out,newy_out,mypalette_out
 
 #p.multi_line(newx, newy,
 #             color=mypalette , line_width=4)
