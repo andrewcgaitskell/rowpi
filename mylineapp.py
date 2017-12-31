@@ -116,9 +116,9 @@ plot.add_layout(yaxis, 'left')
 plot.add_layout(Grid(dimension=0, ticker=xaxis.ticker))
 plot.add_layout(Grid(dimension=1, ticker=yaxis.ticker))
 
-curdoc().add_root(plot)
+curdoc().add_root(column(plot))
 
-show(plot)
+#show(plot)
 
 
 # add a button widget and configure with the call back
