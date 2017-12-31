@@ -84,6 +84,10 @@ def RefreshData():
 df,newx,newy = RefreshData()
 #source = ColumnDataSource(df)
 
+print dict(
+        xs=newx,
+        ys=newy,)
+
 source = ColumnDataSource(dict(
         xs=newx,
         ys=newy,
