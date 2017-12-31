@@ -87,7 +87,7 @@ def RefreshData():
 
     
 
-df,newx,newy,mypalette = RefreshData()
+df,newx,newy = RefreshData()
 #source = ColumnDataSource(df)
 
 source = ColumnDataSource(dict(
