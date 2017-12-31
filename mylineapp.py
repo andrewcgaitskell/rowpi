@@ -48,7 +48,7 @@ def RefreshData():
         # print the name of the regiment
         # print(name)
         # print the data of that regiment
-        my_group_times = group["stroketime"].tolist()
+        my_group_times = group['stroketime'].tolist()
         newx_out.append(my_group_times)
 
     for distance, group in df_out.groupby('rowingid'): 
@@ -70,9 +70,7 @@ def RefreshData():
     
     newdf = pd.merge(df_out, colordf, on='rowingid', how='inner')
     
-    returndf = newdf.rename({1: "xs", 2: "ys", 3: "rowingid", 4: "color"}, axis='index')
-    
-    return returndf, newx_out,newy_out,mypalette_out
+    return newdf, newx_out,newy_out,mypalette_out
 
 #p.multi_line(newx, newy,
 #             color=mypalette , line_width=4)
@@ -111,7 +109,7 @@ df,newx,newy,mypalette = RefreshData()
 print df
 source = ColumnDataSource(df)
 
-glyph = MultiLine(xs='xs', ys='ys', line_color='color', line_width=6)
+glyph = MultiLine(xs='stroketime', ys='distance', line_color='colorofline', line_width=6)
 
 plot.add_glyph(source, glyph)
 
