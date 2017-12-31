@@ -127,14 +127,14 @@ for lor in listofrows:
 #myglyph = MultiLine(xs="stroketime", ys="distance", line_color="#f46d43", line_width=6)
 #plot.add_glyph(mysource, myglyph)
 
-#xaxis = LinearAxis()
-#plot.add_layout(xaxis, 'below')
+xaxis = LinearAxis()
+plot.add_layout(xaxis, 'below')
 
-#yaxis = LinearAxis()
-#plot.add_layout(yaxis, 'left')
+yaxis = LinearAxis()
+plot.add_layout(yaxis, 'left')
 
-#plot.add_layout(Grid(dimension=0, ticker=xaxis.ticker))
-#plot.add_layout(Grid(dimension=1, ticker=yaxis.ticker))
+plot.add_layout(Grid(dimension=0, ticker=xaxis.ticker))
+plot.add_layout(Grid(dimension=1, ticker=yaxis.ticker))
 
 curdoc().add_root(plot)
 
