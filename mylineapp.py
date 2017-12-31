@@ -110,7 +110,7 @@ print df
 source = ColumnDataSource(df)
 
 
-glyph = MultiLine(xs='stroketime', ys='distance', line_color='#3288bd', line_width=6)
+glyph = MultiLine(xs='stroketime', ys='distance', line_color='colorofline', line_width=6)
 
 #plot.add_glyph(source, glyph)
 
@@ -125,9 +125,9 @@ plot.add_layout(yaxis, 'left')
 plot.add_layout(Grid(dimension=0, ticker=xaxis.ticker))
 plot.add_layout(Grid(dimension=1, ticker=yaxis.ticker))
 
-curdoc().add_root(plot)
+#curdoc().add_root(plot)
 
-#show(plot)
+show(plot)
 
 
 # add a button widget and configure with the call back
