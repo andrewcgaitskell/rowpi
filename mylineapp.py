@@ -109,7 +109,7 @@ print df
 
 #glyph2 = MultiLine(df['stroketime'],df['distance'],source = source, line_color = df['colorofline'])
 
-glyph = MultiLine(xs="stroketime", ys="distance", line_color="red", line_width=6)
+glyph = MultiLine(xs="stroketime", ys="distance", line_color="red", line_width=6, source=source)
 
 #plot.add_glyph(source, glyph)
 
