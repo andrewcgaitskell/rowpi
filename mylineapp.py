@@ -103,7 +103,7 @@ plot = Plot(
     title=None, x_range=xdr, y_range=ydr, plot_width=300, plot_height=300,
     h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
 
-glyph = MultiLine(xs="stroketime", ys="distance", line_color=line_color="#8073ac", line_width=2)
+glyph = MultiLine(xs="stroketime", ys="distance", line_color="#8073ac", line_width=2)
 plot.add_glyph(source, glyph)
 
 xaxis = LinearAxis()
