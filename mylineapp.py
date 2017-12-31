@@ -142,8 +142,13 @@ plot.add_layout(Grid(dimension=1, ticker=yaxis.ticker))
 
 def update():
     # updating a single column of the the *same length* is OK
-    plot.lineglyph.line_alpha = 1 
-
+    i = 0
+    for lor in listofrows:
+        source = ColumnDataSource(dict(x=newx_out[i], y=newy_out[i]))
+        lineglyph =  Line(x="x", y="y", line_color=str(mypalette[i]), line_width=6, line_alpha=0.6)
+        plot.add_glyph(source,lineglyph)
+        i = i + 1
+        
 curdoc().add_periodic_callback(update, 50)
 
 curdoc().add_root(plot)
