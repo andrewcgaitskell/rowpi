@@ -58,7 +58,7 @@ def refreshdata():
 
     listofrows_out = df_out['rowingid'].unique()
 
-    numlines=len(listofrows)
+    numlines=len(listofrows_out)
 
     mypalette_out=Spectral11[0:numlines]
     
