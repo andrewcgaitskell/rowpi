@@ -54,13 +54,18 @@ for ch in dev.getCharacteristics():
 # Writing x01 is the protocol for all BLE notifications.
 data_chrc.write(bytes("\x01")) 
 
+
 time.sleep(1.0) # Allow sensor to stabilise
 
+while True:
+    time.sleep(1.0)
+    hr = data_chrc.read(bytes("\x01"))
+    print(hr)
 
 # Main loop --------
-while True:
-    if dev.waitForNotifications(1.0):
-        # handleNotification() was called
-        dev.handleNotification()
-        continue
-    print "Waiting..."
+#while True:
+#    if dev.waitForNotifications(1.0):
+#        # handleNotification() was called
+#        dev.handleNotification()
+#        continue
+#    print "Waiting..."
