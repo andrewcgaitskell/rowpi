@@ -49,8 +49,10 @@ HeartService=p.getServiceByUUID(BLE_SERVICE_UUID)
 try:
    ch = HeartService.getCharacteristics(BLE_CHARACTERISTIC_UUID)
    while 1:
-      val = binascii.b2a_hex(ch.read())
-      print ("0x" + val)
+      #val = binascii.b2a_hex(ch.read())
+      #print ("0x" + val)
+      h = ch.read()
+      print(h)
       time.sleep(1)
 
 finally:
