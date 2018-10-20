@@ -22,15 +22,15 @@ import pandas as pd
 
 from pandas.io import sql
 
-engine = create_engine('postgresql://pi:pi@localhost:5432/data')
+engine = create_engine('postgresql://pi:pi@localhost:5432/rowingdata')
 sqlcmnd_data = 'SELECT stroketime, distance, spm, power, pace, calhr, calories, heartrate, status, rowingid'
-sqlcmnd_data = sqlcmnd_data + ' FROM strokes.floats;'
+sqlcmnd_data = sqlcmnd_data + ' FROM data.strokes;'
 
 conn = psycopg2.connect('host=localhost user=pi password=raspberry dbname=rowdata')
 cur = conn.cursor()
 
 query = """
-    insert into strokes.floats values %s
+    insert into data.strokes values %s
     returning *
 """
 #my_tuple = (2, 'b')
