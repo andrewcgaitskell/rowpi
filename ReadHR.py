@@ -43,12 +43,12 @@ uuidConfig = btle.UUID(BLE_CHARACTERISTIC_UUID)
 data_chrc = ble_service.getCharacteristics(uuidConfig)[0]
 
 # print "Debug Services..."
-# for svc in dev.services:
-# 	print str(svc)
+for svc in dev.services:
+    print str(svc)
 
 # print 'Debug Characteristics...'
-# for ch in es_service.getCharacteristics():
-# 	print str(ch)
+for ch in es_service.getCharacteristics():
+    print str(ch)
 
 # Enable the sensor, start notifications
 # Writing x01 is the protocol for all BLE notifications.
@@ -61,5 +61,6 @@ time.sleep(1.0) # Allow sensor to stabilise
 while True:
     if dev.waitForNotifications(1.0):
         # handleNotification() was called
+        dev.handleNotification()
         continue
     print "Waiting..."
