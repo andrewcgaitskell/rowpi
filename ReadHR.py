@@ -47,7 +47,7 @@ rate_service_uuid    = UUID(0x11)
 HeartService=p.getServiceByUUID(BLE_SERVICE_UUID)
 
 try:
-    ch = HeartService.getCharacteristics(rate_service_uuid)[0]
+    ch = HeartService.getCharacteristics(BLE_CHARACTERISTIC_UUID)
     if (ch.supportsRead()):
         while 1:
             val = binascii.b2a_hex(ch.read())
