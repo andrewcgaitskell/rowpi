@@ -1,15 +1,3 @@
-#!/usr/bin/env python
-#Copyright (c) 2011, Sam Gambrell
-#Licensed under the Simplified BSD License.
-
-#This is an example file to show how to make use of pyrow
-#Have the rowing machine on and plugged into the computer before starting the program
-#The program will record Time, Distance, SPM, Pace, and Force Data for each
-#stroke and save it to 'workout.csv'
-
-#NOTE: This code has not been thoroughly tested and may not function as advertised.
-#Please report and findings to the author so that they may be addressed in a stable release.
-
 import pyrow
 import time
 
@@ -26,7 +14,7 @@ engine = create_engine('postgresql://pi:pi@localhost:5432/rowingdata')
 sqlcmnd_data = 'SELECT stroketime, distance, spm, power, pace, calhr, calories, heartrate, status, rowingid'
 sqlcmnd_data = sqlcmnd_data + ' FROM data.strokes;'
 
-conn = psycopg2.connect('host=localhost user=pi password=raspberry dbname=rowdata')
+conn = psycopg2.connect('host=localhost user=pi password=raspberry dbname=rowingdata')
 cur = conn.cursor()
 
 query = """
@@ -125,8 +113,8 @@ if __name__ == '__main__':
         workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str)
         workoutdata = ','.join(workouttuple)
 
-        #cur.execute(query, (workouttuple_float,))
-        #conn.commit()
+        cur.execute(query, (workouttuple,))
+        conn.commit()
 
         write_file.write(workoutdata+'\n') 
 
