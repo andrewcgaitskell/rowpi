@@ -46,10 +46,28 @@ for ch in chList:
 
 #HeartService=p.getServiceByUUID(BLE_SERVICE_UUID)
 
-# Without this, the reading of the temperature characteristic fails 
-p.setSecurityLevel("medium")
+class MyDelegate(btle.DefaultDelegate):
+    def __init__(self):
+        btle.DefaultDelegate.__init__(self)
 
-svc = p.getServiceByUUID(BLE_SERVICE_UUID)
-ch = svc.getCharacteristics(BLE_CHARACTERISTIC_UUID)[0]
+    def handleNotification(self, cHandle, data):
+        print("A notification was received: %s" %data)
 
-print "Heart: {}".format(ord(ch.read()))
+
+p = btle.Peripheral(BLE_ADDRESS, btle.ADDR_TYPE_RANDOM)
+p.setDelegate( MyDelegate() )
+
+# Setup to turn notifications on, e.g.
+svc = p.getServiceByUUID( BLE_SERVICE_UUID )
+ch = svc.getCharacteristics()[0]
+print(ch.valHandle)
+
+p.writeCharacteristic(ch.valHandle+1, "\x02\x00")
+
+while True:
+    if p.waitForNotifications(1.0):
+        # handleNotification() was called
+        continue
+
+    print("Waiting...")
+    # Perhaps do something else here
