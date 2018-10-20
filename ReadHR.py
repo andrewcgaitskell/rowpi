@@ -47,7 +47,7 @@ for svc in dev.services:
     print str(svc)
 
 # print 'Debug Characteristics...'
-for ch in es_service.getCharacteristics():
+for ch in dev.getCharacteristics():
     print str(ch)
 
 # Enable the sensor, start notifications
