@@ -41,10 +41,10 @@ for ch in chList:
    
    
 
-heart_service_uuid = UUID(0x000f)
-rate_service_uuid    = UUID(0x0011)
+#heart_service_uuid = UUID(0x000f)
+rate_service_uuid    = UUID(0x11)
 
-HeartService=p.getServiceByUUID(heart_service_uuid)
+HeartService=p.getServiceByUUID(BLE_SERVICE_UUID)
 
 try:
     ch = HeartService.getCharacteristics(rate_service_uuid)[0]
