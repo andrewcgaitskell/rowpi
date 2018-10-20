@@ -32,6 +32,15 @@ services=p.getServices()
 for service in services:
    print service
 
+   
+chList = p.getCharacteristics()
+print "Handle   UUID                                Properties"
+print "-------------------------------------------------------"                       
+for ch in chList:
+   print ("  0x"+ format(ch.getHandle(),'02X')  +"   "+str(ch.uuid) +" " + ch.propertiesToString())
+   
+   
+
 heart_service_uuid = UUID(0x000f)
 rate_service_uuid    = UUID(0x0011)
 
