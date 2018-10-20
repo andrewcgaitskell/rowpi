@@ -14,6 +14,8 @@ from bluepy.btle import UUID, Peripheral
 import time
 import binascii
 
+import struct
+
 # Address of BLE device to connect to.
 BLE_ADDRESS = "00:22:D0:2A:7F:99" # changed this to my own
 # BLE heart rate service - 180d
@@ -30,3 +32,18 @@ services=p.getServices()
 for service in services:
    print service
 
+heart_service_uuid = UUID(0x000f)
+rate_service_uuid    = UUID(0x0011)
+
+HeartService=p.getServiceByUUID(heart_service_uuid)
+
+try:
+    ch = HeartService.getCharacteristics(rate_service_uuid)[0]
+    if (ch.supportsRead()):
+        while 1:
+            val = binascii.b2a_hex(ch.read())
+            print ("0x" + val)
+            time.sleep(1)
+
+finally:
+    p.disconnect()
