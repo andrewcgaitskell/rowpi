@@ -22,10 +22,11 @@ import pandas as pd
 
 from pandas.io import sql
 
-engine = create_engine('postgresql://andrew:andrew@localhost:5432/data')
-sqlcmnd_data = 'SELECT stroketime, distance, spm, power, pace, calhr, calories, heartrate, status, rowingid FROM strokes.floats;'
+engine = create_engine('postgresql://pi:pi@localhost:5432/data')
+sqlcmnd_data = 'SELECT stroketime, distance, spm, power, pace, calhr, calories, heartrate, status, rowingid'
+sqlcmnd_data = sqlcmnd_data + ' FROM strokes.floats;'
 
-conn = psycopg2.connect('host=localhost user=andrew password=andrew dbname=data')
+conn = psycopg2.connect('host=localhost user=pi password=raspberry dbname=rowdata')
 cur = conn.cursor()
 
 query = """
@@ -124,8 +125,8 @@ if __name__ == '__main__':
         workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str)
         workoutdata = ','.join(workouttuple)
 
-        cur.execute(query, (workouttuple_float,))
-        conn.commit()
+        #cur.execute(query, (workouttuple_float,))
+        #conn.commit()
 
         write_file.write(workoutdata+'\n') 
 
