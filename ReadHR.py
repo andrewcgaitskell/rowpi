@@ -14,10 +14,10 @@ import binascii
 
 # Address of BLE device to connect to.
 BLE_ADDRESS = "00:22:D0:2A:7F:99" # changed this to my own
-# BLE heart rate service
+# BLE heart rate service - 180d
 BLE_SERVICE_UUID ="0000180d-0000-1000-8000-00805f9b34fb"
-# Heart rate measurement that notifies.
-BLE_CHARACTERISTIC_UUID= "00001800-0000-1000-8000-00805f9b34fb";
+# Heart rate measurement that notifies - 2a37
+BLE_CHARACTERISTIC_UUID= "00002a37-0000-1000-8000-00805f9b34fb";
 
 
 class MyDelegate(btle.DefaultDelegate):
