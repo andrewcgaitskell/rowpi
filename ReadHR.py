@@ -42,18 +42,14 @@ for ch in chList:
    
 
 #heart_service_uuid = UUID(0x000f)
-rate_service_uuid    = UUID(0x11)
+#rate_service_uuid    = UUID(0x11)
 
-HeartService=p.getServiceByUUID(BLE_SERVICE_UUID)
+#HeartService=p.getServiceByUUID(BLE_SERVICE_UUID)
 
-try:
-   ch = HeartService.getCharacteristics(BLE_CHARACTERISTIC_UUID)
-   while 1:
-      #val = binascii.b2a_hex(ch.read())
-      #print ("0x" + val)
-      h = ch.read()
-      print(h)
-      time.sleep(1)
+# Without this, the reading of the temperature characteristic fails 
+p.setSecurityLevel("medium")
 
-finally:
-    p.disconnect()
+svc = p.getServiceByUUID(BLE_SERVICE_UUID)
+ch = svc.getCharacteristics(BLE_CHARACTERISTIC_UUID)[0]
+
+print "Heart: {}".format(ord(ch.read()))
