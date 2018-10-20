@@ -78,21 +78,4 @@ while True:
     except Exception as e:
         print e
             
-#while True:
-#    sleep(1) # Need this to slow the changes down
-#    try:
-#        read = hrm.getHeartbeat()
-#        hb = int(read)
-#        if hb != 0:
-#            with open('/home/pi/hb.txt', 'w') as f:
-#                f.write('{}'.format(hb))
-#        else:
-#            hrm = heartMonitor(BLE_ADDRESS)
-#            hrm.startMonitor()
-#    except Exception as e:
-#        print e
-#        if read != "Booting":
-#            hrm = heartMonitor(BLE_ADDRESS)
-#            hrm.startMonitor()
-#        continue
-    
+
