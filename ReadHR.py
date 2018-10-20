@@ -54,7 +54,7 @@ class MyDelegate(btle.DefaultDelegate):
         print("A notification was received: %s" %data)
 
 
-p = btle.Peripheral(BLE_ADDRESS, btle.ADDR_TYPE_RANDOM)
+p = btle.Peripheral(BLE_ADDRESS)
 p.setDelegate( MyDelegate() )
 
 # Setup to turn notifications on, e.g.
