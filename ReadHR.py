@@ -59,7 +59,7 @@ time.sleep(1.0) # Allow sensor to stabilise
 
 while True:
     time.sleep(1.0)
-    hr = data_chrc.read(bytes("\x01"))
+    hr = data_chrc.read()
     print(hr)
 
 # Main loop --------
