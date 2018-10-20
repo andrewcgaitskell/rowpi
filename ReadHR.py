@@ -22,7 +22,7 @@ BLE_SERVICE_UUID ="0000180d-0000-1000-8000-00805f9b34fb"
 BLE_CHARACTERISTIC_UUID= "00002a37-0000-1000-8000-00805f9b34fb";
 
 
-p = Peripheral(BLE_ADDRESS,"random")
+p = Peripheral(BLE_ADDRESS)
 
 services=p.getServices()
 
