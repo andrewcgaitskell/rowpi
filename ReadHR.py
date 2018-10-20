@@ -8,7 +8,9 @@
 # @see http://ianharvey.github.io/bluepy-doc/notifications.html
 # Code assumes adapter is already enabled, and scan was already done.
 
+import sys
 from bluepy import btle
+from bluepy.btle import UUID, Peripheral
 import time
 import binascii
 
@@ -20,52 +22,11 @@ BLE_SERVICE_UUID ="0000180d-0000-1000-8000-00805f9b34fb"
 BLE_CHARACTERISTIC_UUID= "00002a37-0000-1000-8000-00805f9b34fb";
 
 
-class MyDelegate(btle.DefaultDelegate):
-    def __init__(self):
-        btle.DefaultDelegate.__init__(self)
-        # ... initialise here
+p = Peripheral(BLE_ADDRESS,"random")
 
-    def handleNotification(self, cHandle, data):
-    	data = bytearray(data)
-    	print 'Developer: do what you want with the data.'
-    	print data
+services=p.getServices()
 
+#displays all services
+for service in services:
+   print service
 
-
-print "Connecting..."
-dev = btle.Peripheral(BLE_ADDRESS)
-dev.setDelegate( MyDelegate() )
- 
-service_uuid = btle.UUID(BLE_SERVICE_UUID)
-ble_service = dev.getServiceByUUID(service_uuid)
-
-uuidConfig = btle.UUID(BLE_CHARACTERISTIC_UUID)
-data_chrc = ble_service.getCharacteristics(uuidConfig)[0]
-
-# print "Debug Services..."
-for svc in dev.services:
-    print str(svc)
-
-# print 'Debug Characteristics...'
-for ch in dev.getCharacteristics():
-    print str(ch)
-
-# Enable the sensor, start notifications
-# Writing x01 is the protocol for all BLE notifications.
-data_chrc.write(bytes("\x01")) 
-
-
-time.sleep(1.0) # Allow sensor to stabilise
-
-while True:
-    time.sleep(1.0)
-    hr = data_chrc.read()
-    print(hr)
-
-# Main loop --------
-#while True:
-#    if dev.waitForNotifications(1.0):
-#        # handleNotification() was called
-#        dev.handleNotification()
-#        continue
-#    print "Waiting..."
