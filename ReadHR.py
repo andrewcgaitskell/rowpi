@@ -15,7 +15,7 @@ import binascii
 # Address of BLE device to connect to.
 BLE_ADDRESS = "00:22:D0:2A:7F:99" # changed this to my own
 # BLE heart rate service
-BLE_SERVICE_UUID ="A1D1BB46-AA06-CA32-ABAE-DE11DFF9C688"
+BLE_SERVICE_UUID ="0000180d-0000-1000-8000-00805f9b34fb"
 # Heart rate measurement that notifies.
 BLE_CHARACTERISTIC_UUID= "00001800-0000-1000-8000-00805f9b34fb";
 
