@@ -1,12 +1,19 @@
+## https://github.com/danielfppps/hbpimon/blob/master/hb.py
+
 import struct
 import bluepy.btle as btle
 import sys
 from time import sleep
-from tendo import singleton
-
-me = singleton.SingleInstance() 
 
 heartrate_uuid = btle.UUID(0x2a37)
+
+# Address of BLE device to connect to.
+BLE_ADDRESS = "00:22:D0:2A:7F:99" # changed this to my own
+# BLE heart rate service - 180d
+BLE_SERVICE_UUID ="0000180d-0000-1000-8000-00805f9b34fb"
+# Heart rate measurement that notifies - 2a37
+BLE_CHARACTERISTIC_UUID= "00002a37-0000-1000-8000-00805f9b34fb";
+
 
 class heartMonitor:
     def __init__(self, mac):
@@ -58,7 +65,7 @@ class heartDelegate(btle.DefaultDelegate):
     def getlastbeat(self):
         return self.message
 
-hrm = heartMonitor("00:22:D0:2C:13:7E")
+hrm = heartMonitor(BLE_ADDRESS)
 hrm.startMonitor()
 
 while True:
@@ -70,12 +77,12 @@ while True:
             with open('/home/pi/hb.txt', 'w') as f:
                 f.write('{}'.format(hb))
         else:
-            hrm = heartMonitor("00:22:D0:2C:13:7E")
+            hrm = heartMonitor(BLE_ADDRESS)
             hrm.startMonitor()
     except Exception as e:
         print e
         if read != "Booting":
-            hrm = heartMonitor("00:22:D0:2C:13:7E")
+            hrm = heartMonitor(BLE_ADDRESS)
             hrm.startMonitor()
         continue
     
