@@ -21,11 +21,11 @@ from sqlalchemy import create_engine
 import pandas as pd
 from pandas.io import sql
 
-engine = create_engine('postgresql://andrew:andrew@localhost:5432/data')
+engine = create_engine('postgresql://pi:pi@localhost:5432/rowingdata')
 
 #sqlcmnd = 'SELECT stroketime, distance, spm, power, pace, calhr, calories, heartrate, status, rowingid FROM strokes.floats;'
 
-sqlcmnd = 'SELECT stroketime, distance,rowingid FROM strokes.floats;'
+sqlcmnd = 'SELECT stroketime, distance,rowingid FROM data.strokes;'
 
 def refreshdata():
 
