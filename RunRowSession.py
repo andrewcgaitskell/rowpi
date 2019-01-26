@@ -187,9 +187,8 @@ if __name__ == '__main__':
         status_float = float(status_str)
 
         workouttuple_float = (time_float,distance_float,spm_float,power_float,pace_float,calhr_float,calories_float,heartrate_float,status_float,rowingid)
-
-        print(str(monitor['forceplot']))
-        forceplot_str = str(monitor['forceplot'])
+        
+        forceplot_str = str(force)
         strokestate_str = str(monitor['strokerate'])
 
         #Write data to write_file
