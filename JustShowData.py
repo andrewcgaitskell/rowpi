@@ -94,7 +94,7 @@ plot.add_layout(Grid(dimension=1, ticker=yaxis.ticker))
 lineglyph =  Line(x="stroketime", y="distance", line_color="#f46d43", line_width=6, line_alpha=0.6)
 plot.add_glyph(source, lineglyph)
 
-plot.show
+show(plot)
 
 # i = 0
 # for lor in listofrows:
