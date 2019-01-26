@@ -30,3 +30,37 @@ hover = HoverTool(tooltips =[
      ('group','@group'),('x','@x'),('y','@y')])
 p2.add_tools(hover)
 show(p2)
+
+#bokeh - multi_line
+grp_list = df.group.unique()
+xs = [df.loc[df.group == i].x for i in grp_list]
+ys = [df.loc[df.group == i].y for i in grp_list]
+source = ColumnDataSource(data=dict(
+     x = xs,
+     y = ys,
+     color = (Category10[3])[0:len(grp_list)],
+     group = grp_list))
+p3 = figure(plot_width=600, plot_height=300)
+p3.multi_line(
+     xs='x',
+     ys='y',
+     legend='group',
+     source=source,
+     line_color='color')
+#Add hover tools, basically an invisible line
+source2 = ColumnDataSource(dict(
+     invisible_xs=df.x,
+     invisible_ys=df.y,
+     group = df.group))
+line = p3.line(
+     'invisible_xs',
+     'invisible_ys',
+     source=source2,
+     alpha=0)
+hover = HoverTool(tooltips =[
+     ('group','@group'),
+     ('x','@x'),
+     ('y','@y')])
+hover.renderers = [line]
+p3.add_tools(hover)
+show(p3)
