@@ -159,8 +159,12 @@ if __name__ == '__main__':
             force.extend(forceplot['forceplot'])
 
         #Write data to write_file
-        read = hrm.getHeartbeat()
-        hb = int(read)
+        
+        try:
+            read = hrm.getHeartbeat()
+            hb = int(read)
+        except Exception as e:
+            hb = 0
         
         time_str = str(monitor['time'])
         distance_str = str(monitor['distance'])
