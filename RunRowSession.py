@@ -110,14 +110,6 @@ class heartDelegate(btle.DefaultDelegate):
 hrm = heartMonitor(BLE_ADDRESS)
 hrm.startMonitor()
 
-
-    try:
-        
-        if hb != 0:
-            print(hb)
-    except Exception as e:
-        print e
-            
 ######################################
 
 if __name__ == '__main__':
