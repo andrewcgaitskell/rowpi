@@ -110,7 +110,7 @@ if __name__ == '__main__':
 
         #Write data to write_file
 
-        workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str)
+        workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str,rowingid)
         workoutdata = ','.join(workouttuple)
 
         cur.execute(query, (workouttuple,))
