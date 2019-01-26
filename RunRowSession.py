@@ -189,11 +189,10 @@ if __name__ == '__main__':
         workouttuple_float = (time_float,distance_float,spm_float,power_float,pace_float,calhr_float,calories_float,heartrate_float,status_float,rowingid)
         
         forceplot_str = str(force)
-        strokestate_str = str(monitor['strokerate'])
 
         #Write data to write_file
 
-        workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str,rowingid,strokestate_str,forceplot_str)
+        workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str,rowingid,forceplot_str)
         
         workoutdata = ','.join(workouttuple)
 
