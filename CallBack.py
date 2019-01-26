@@ -1,3 +1,4 @@
+# bokeh serve --show CallBack.py
 
 from bokeh.plotting import figure, curdoc
 from bokeh.driving import linear
