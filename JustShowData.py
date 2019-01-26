@@ -91,17 +91,17 @@ plot.add_layout(Grid(dimension=1, ticker=yaxis.ticker))
 # mysource = ColumnDataSource(df)
 
 ## this line worked
-lineglyph =  Line(x="stroketime", y="distance", line_color="#f46d43", line_width=6, line_alpha=0.6)
-plot.add_glyph(source, lineglyph)
+## lineglyph =  Line(x="stroketime", y="distance", line_color="#f46d43", line_width=6, line_alpha=0.6)
+## plot.add_glyph(source, lineglyph)
 
-show(plot)
+## show(plot)
 
-# i = 0
-# for lor in listofrows:
-#     source = ColumnDataSource(dict(x=newx[i], y=newy[i]))
-#     lineglyph =  Line(x="x", y="y", line_color=str(mypalette[i]), line_width=6, line_alpha=0.6)
-#     plot.add_glyph(source,lineglyph)
-#     i = i + 1
+i = 0
+for lor in listofrows:
+    source = ColumnDataSource(dict(x=newx[i], y=newy[i]))
+    lineglyph =  Line(x="x", y="y", line_color=str(mypalette[i]), line_width=6, line_alpha=0.6)
+    plot.add_glyph(source,lineglyph)
+    i = i + 1
 
 
 #colorlookup = zip(listofrows, mypalette_wking)
