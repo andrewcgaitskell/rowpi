@@ -18,8 +18,14 @@ from bokeh.io import curdoc, show
 from bokeh.plotting import reset_output
 
 from sqlalchemy import create_engine
+
+import psycopg2
+
 import pandas as pd
 from pandas.io import sql
+
+# conn = psycopg2.connect('host=localhost user=pi password=raspberry dbname=rowingdata')
+# cur = conn.cursor()
 
 engine = create_engine('postgresql://pi:raspberry@localhost:5432/rowingdata')
 
