@@ -43,7 +43,7 @@ query = """
 """
 
 forceplotquery = """
-    insert into data.forceplot(rowid,force,id) values %s
+    insert into data.forceplot(rowid,force,id,strokeid) values %s
     returning *
     """
 
@@ -202,7 +202,7 @@ if __name__ == '__main__':
         
         for f in force:
             i=i+1
-            forcetuple = (rowingid,f,i)
+            forcetuple = (rowingid,f,i,stroke_counter)
             cur.execute(forceplotquery, (forcetuple,))
             
         conn.commit()   
