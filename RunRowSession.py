@@ -41,6 +41,12 @@ query = """
     insert into data.strokes values %s
     returning *
 """
+
+forceplotquery = """
+    insert into data.forceplot(rowid,force,id) values %s
+    returning *
+    """
+
 #my_tuple = (2, 'b')
 
 #cursor.execute(query, (my_tuple,)) # Notice the comma after my_tuple
@@ -192,6 +198,14 @@ if __name__ == '__main__':
         
         print(force)
         
+        i = 0
+        
+        for f in force:
+            i=i+1
+            forcetuple = (rowingid,f,i)
+            cur.execute(forceplotquery, (forcetuple,))
+            
+        conn.commit()   
         #Write data to write_file
 
         workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str,rowingid)
