@@ -11,6 +11,9 @@ group = np.repeat(['Group 1', 'Group 2','Group 3'], 10)
 x = list(range(1,11))*3
 y = np.random.randint(10, size=30)
 df = pd.DataFrame({'group': group,'x': x,'y': y})
+print('df')
+
+print(df)
 
 p2 = figure(plot_width=600, plot_height=300)
 grp_list = df.group.unique()
@@ -34,6 +37,9 @@ show(p2)
 #bokeh - multi_line
 grp_list = df.group.unique()
 xs = [df.loc[df.group == i].x for i in grp_list]
+print("xs",xs)
+
+
 ys = [df.loc[df.group == i].y for i in grp_list]
 source = ColumnDataSource(data=dict(
      x = xs,
