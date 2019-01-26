@@ -37,7 +37,7 @@ sqlcmnd = 'SELECT stroketime, distance,rowingid FROM data.strokes;'
 
 
 # output to static HTML file
-output_file("lines.html")
+# output_file("lines.html")
 
 df_out = pd.read_sql_query(sqlcmnd, engine)
 source = ColumnDataSource(data=df_out)
