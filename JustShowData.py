@@ -41,7 +41,7 @@ sqlcmnd = 'SELECT stroketime, distance,rowingid FROM data.strokes;'
 
 df_out = pd.read_sql_query(sqlcmnd, engine)
 source = ColumnDataSource(data=df_out)
-#print df
+print(df_out)
 
 #my_times = df["stroketime"].tolist()
 #my_distances = df["distance"].tolist()
@@ -94,7 +94,7 @@ plot.add_layout(Grid(dimension=1, ticker=yaxis.ticker))
 lineglyph =  Line(x="stroketime", y="distance", line_color="#f46d43", line_width=6, line_alpha=0.6)
 plot.add_glyph(source, lineglyph)
 
-show(plot)
+plot.show
 
 # i = 0
 # for lor in listofrows:
