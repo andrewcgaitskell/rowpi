@@ -10,6 +10,26 @@ import pandas as pd
 
 from pandas.io import sql
 
+##### hr stuff ####
+
+import struct
+import bluepy.btle as btle
+import sys
+from time import sleep
+
+heartrate_uuid = btle.UUID(0x2a37)
+
+# Address of BLE device to connect to.
+BLE_ADDRESS = "00:22:D0:2A:7F:99" # changed this to my own
+# BLE heart rate service - 180d
+BLE_SERVICE_UUID ="0000180d-0000-1000-8000-00805f9b34fb"
+# Heart rate measurement that notifies - 2a37
+BLE_CHARACTERISTIC_UUID= "00002a37-0000-1000-8000-00805f9b34fb";
+
+
+#####
+
+
 engine = create_engine('postgresql://pi:pi@localhost:5432/rowingdata')
 sqlcmnd_data = 'SELECT stroketime, distance, spm, power, pace, calhr, calories, heartrate, status, rowingid'
 sqlcmnd_data = sqlcmnd_data + ' FROM data.strokes;'
@@ -33,6 +53,72 @@ query = """
 
 #cur.execute('select * from people')
 
+############################
+## https://github.com/danielfppps/hbpimon/blob/master/hb.py
+
+
+class heartMonitor:
+    def __init__(self, mac):
+        try:
+            self.p = btle.Peripheral(mac)
+            self.p.setDelegate(heartDelegate())
+        except Exception as e:
+            print str(e)
+            self.p = 0
+            print "Not connected"
+
+    def startMonitor(self):
+        try:
+            self.p.writeCharacteristic(0x12, struct.pack('<bb', 0x01, 0x00), False)
+            self.p.writeCharacteristic(0x11, '\x04', False)
+        except:
+            e = sys.exc_info()[0]
+            print("HeartMonitor Error: %s" % e)
+            try:
+                self.p.disconnect()
+            except:
+                return 0
+
+    def getHeartbeat(self):
+        try:
+            self.p.waitForNotifications(1.0)
+            return self.p.delegate.getlastbeat()
+        except:
+            return 0
+
+    def stopMonitor(self):
+        self.p.writeCharacteristic(0x11, '\x00', False)
+
+
+class heartDelegate(btle.DefaultDelegate):
+    message = 0
+
+    def __init__(self):
+        btle.DefaultDelegate.__init__(self)
+
+    def handleNotification(self, cHandle, data):
+        if(data[0] == '\x14'):
+            self.message = "Connection Lost"
+        if(data[0] == '\x16'):
+            self.message = str(struct.unpack("B", data[1])[0])
+        if(data[0] == '\x06'):
+            self.message = "Booting"
+
+    def getlastbeat(self):
+        return self.message
+
+hrm = heartMonitor(BLE_ADDRESS)
+hrm.startMonitor()
+
+
+    try:
+        
+        if hb != 0:
+            print(hb)
+    except Exception as e:
+        print e
+            
+######################################
 
 if __name__ == '__main__':
 
@@ -81,7 +167,9 @@ if __name__ == '__main__':
             force.extend(forceplot['forceplot'])
 
         #Write data to write_file
-
+        read = hrm.getHeartbeat()
+        hb = int(read)
+        
         time_str = str(monitor['time'])
         distance_str = str(monitor['distance'])
         spm_str = str(monitor['spm'])
@@ -89,7 +177,8 @@ if __name__ == '__main__':
         pace_str = str(monitor['pace'])
         calhr_str = str(monitor['calhr'])
         calories_str = str(monitor['calories'])
-        heartrate_str = str(monitor['heartrate'])
+        ##heartrate_str = str(monitor['heartrate'])
+        heartrate_str = str(hb)
         status_str = str(monitor['status'])
 
         time_float = float(time_str)
