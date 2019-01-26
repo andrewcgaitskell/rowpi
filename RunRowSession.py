@@ -190,7 +190,7 @@ if __name__ == '__main__':
         
         forcedata = ";".join([str(f) for f in force])   
         
-        print(forcedata)
+        print(force)
         
         #Write data to write_file
 
