@@ -28,7 +28,7 @@ engine = create_engine('postgresql://pi:raspberry@localhost:5432/rowingdata')
 
 # sqlcmnd = 'SELECT stroketime, distance,rowingid FROM data.strokes;'
 
-sqlcmnd = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, distance,pace,  rowingid FROM data.strokes;'
+sqlcmnd = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, distance,(pace/60) as pace,  rowingid FROM data.strokes;'
 
 sqlcmnd_heart = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter,heartrate, rowingid FROM data.strokes;'
 
@@ -88,9 +88,12 @@ p4 = figure(plot_width=600, plot_height=400)
 
 p3.yaxis.axis_label = 'pace'
 p3.yaxis.axis_label_text_font_size = '30pt'
+p3.yaxis.major_label_text_font_size = '25pt'
 
 p4.yaxis.axis_label = 'heart'
 p4.yaxis.axis_label_text_font_size = '30pt'
+p4.yaxis.major_label_text_font_size = '25pt'
+
 
 p3.multi_line(
      xs='x',
