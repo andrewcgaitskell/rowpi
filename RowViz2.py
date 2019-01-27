@@ -86,19 +86,27 @@ p3 = figure(plot_width=600, plot_height=400)
 
 p4 = figure(plot_width=600, plot_height=400)
 
+p3.yaxis.axis_label = 'pace'
+p3.yaxis.axis_label_text_font_size = '30pt'
+
+p4.yaxis.axis_label = 'heart'
+p4.yaxis.axis_label_text_font_size = '30pt'
+
 p3.multi_line(
      xs='x',
      ys='y',
      legend='group',
      source=source,
-     line_color='color')
+     line_color='color',
+     line_width=5)
 
 p4.multi_line(
      xs='x',
      ys='y',
      legend='group',
      source=source_heart,
-     line_color='color')
+     line_color='color',
+     line_width=5)    
 
 
 def update():
