@@ -73,8 +73,6 @@ p3.multi_line(
      source=source,
      line_color='color')
 
-show(p3)
-
 def update():
     
     df_out = pd.read_sql_query(sqlcmnd, engine)
@@ -104,20 +102,15 @@ def update():
     xs = [df_out.loc[df_out['rowingid'] == i].strokecounter for i in grp_list]
 
     ys = [df_out.loc[df_out['rowingid'] == i].pace for i in grp_list]
+    
     source = ColumnDataSource(data=dict(
          x = xs,
          y = ys,
          color = mypalette_out,
          group = simplelegend))
-    p3 = figure(plot_width=1000, plot_height=600)
-    p3.multi_line(
-         xs='x',
-         ys='y',
-         legend='group',
-         source=source,
-         line_color='color')
+    
     
 curdoc().add_root(p3)
 
 # Add a periodic callback to be run every 500 milliseconds
-curdoc().add_periodic_callback(update, 500)
+curdoc().add_periodic_callback(update, 200)
