@@ -32,15 +32,6 @@ df_out = pd.read_sql_query(sqlcmnd, engine)
 newx_out = []
 newy_out = []
 
-# Group the dataframe by regiment, and for each regiment,
-for stroketime, group in df_out.groupby('rowingid'): 
-    my_group_times = group['stroketime'].tolist()
-    newx_out.append(my_group_times)
-
-for distance, group in df_out.groupby('rowingid'): 
-    my_group_distances = group['distance'].tolist()
-    newy_out.append(my_group_distances)
-
 listofrows_out = df_out['rowingid'].unique()
 
 numlines=len(listofrows_out)
@@ -81,3 +72,49 @@ p3.multi_line(
 
 show(p3)
 
+def update():
+    
+    df_out = pd.read_sql_query(sqlcmnd, engine)
+
+    newx_out = []
+    newy_out = []
+
+    listofrows_out = df_out['rowingid'].unique()
+
+    numlines=len(listofrows_out)
+
+    mypalette_out=Spectral11[0:numlines]
+
+    xdr = DataRange1d()
+    ydr = DataRange1d()
+
+    ######## bokeh - multi_line #############
+    grp_list = df_out['rowingid'].unique()
+
+    rowscount = len(grp_list)
+
+    simplelegend = []
+
+    for r in range(0,rowscount):
+        simplelegend.append(r)
+
+    xs = [df_out.loc[df_out['rowingid'] == i].strokecounter for i in grp_list]
+
+    ys = [df_out.loc[df_out['rowingid'] == i].pace for i in grp_list]
+    source = ColumnDataSource(data=dict(
+         x = xs,
+         y = ys,
+         color = mypalette_out,
+         group = simplelegend))
+    p3 = figure(plot_width=1000, plot_height=600)
+    p3.multi_line(
+         xs='x',
+         ys='y',
+         legend='group',
+         source=source,
+         line_color='color')
+    
+curdoc().add_root(p3)
+
+# Add a periodic callback to be run every 500 milliseconds
+curdoc().add_periodic_callback(update, 500)
