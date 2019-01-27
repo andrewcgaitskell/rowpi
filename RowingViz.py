@@ -100,11 +100,11 @@ ydr = DataRange1d()
 
 ######## bokeh - multi_line #############
 grp_list = df_out['rowingid'].unique()
-xs = [df.loc[df_out['rowingid'] == i].x for i in grp_list]
+xs = [df_out.loc[df_out['rowingid'] == i].x for i in grp_list]
 print("xs",xs)
 
 
-ys = [df.loc[df_out['rowingid'] == i].y for i in grp_list]
+ys = [df_out.loc[df_out['rowingid'] == i].y for i in grp_list]
 source = ColumnDataSource(data=dict(
      x = xs,
      y = ys,
