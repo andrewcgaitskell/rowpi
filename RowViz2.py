@@ -28,7 +28,7 @@ engine = create_engine('postgresql://pi:raspberry@localhost:5432/rowingdata')
 
 # sqlcmnd = 'SELECT stroketime, distance,rowingid FROM data.strokes;'
 
-sqlcmnd = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, distance,cast(pace as Double precision)/60 as pace, 4*cast(pace as Double precision)/60 as TwoKEstimate, rowingid FROM data.strokes;'
+sqlcmnd = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, distance,cast(pace as Double precision)/60 as pace, (4*cast(pace as Double precision)/60) as TwoKEstimate, rowingid FROM data.strokes;'
 
 sqlcmnd_heart = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter,heartrate, rowingid FROM data.strokes;'
 
@@ -142,7 +142,7 @@ def update():
 
     xs = [df_out.loc[df_out['rowingid'] == i].strokecounter for i in grp_list]
 
-    ys = [df_out.loc[df_out['rowingid'] == i].pace for i in grp_list]
+    ys = [df_out.loc[df_out['rowingid'] == i].TwoKEstimate for i in grp_list]
     
     ys_heart = [df_out_heart.loc[df_out_heart['rowingid'] == i].heartrate for i in grp_list]
 
