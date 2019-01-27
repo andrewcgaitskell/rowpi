@@ -30,7 +30,12 @@ engine = create_engine('postgresql://pi:raspberry@localhost:5432/rowingdata')
 
 sqlcmnd = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, distance,pace,  rowingid FROM data.strokes;'
 
+sqlcmnd_heart = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter,heartrate, rowingid FROM data.strokes;'
+
+
 df_out = pd.read_sql_query(sqlcmnd, engine)
+
+df_out_heart = pd.read_sql_query(sqlcmnd_heart, engine)
 
 newx_out = []
 newy_out = []
@@ -60,12 +65,27 @@ print("xs",xs)
 
 
 ys = [df_out.loc[df_out['rowingid'] == i].pace for i in grp_list]
+
+ys_heart = [df_out_heart.loc[df_out_heart['rowingid'] == i].heartrate for i in grp_list]
+
+
 source = ColumnDataSource(data=dict(
      x = xs,
      y = ys,
      color = mypalette_out,
      group = simplelegend))
-p3 = figure(plot_width=1000, plot_height=600)
+
+
+source_heart = ColumnDataSource(data=dict(
+     x = xs,
+     y = ys_heart,
+     color = mypalette_out,
+     group = simplelegend))
+
+p3 = figure(plot_width=1000, plot_height=400)
+
+p4 = figure(plot_width=1000, plot_height=400)
+
 p3.multi_line(
      xs='x',
      ys='y',
@@ -73,9 +93,19 @@ p3.multi_line(
      source=source,
      line_color='color')
 
+p4.multi_line(
+     xs='x',
+     ys='y',
+     legend='group',
+     source=source_heart,
+     line_color='color')
+
+
 def update():
     
     df_out = pd.read_sql_query(sqlcmnd, engine)
+    
+    df_out_heart = pd.read_sql_query(sqlcmnd_heart, engine)
 
     newx_out = []
     newy_out = []
@@ -103,11 +133,14 @@ def update():
 
     ys = [df_out.loc[df_out['rowingid'] == i].pace for i in grp_list]
     
+    ys_heart = [df_out_heart.loc[df_out_heart['rowingid'] == i].heartrate for i in grp_list]
+
     source.data = dict(x = xs,y = ys,color = mypalette_out,group = simplelegend)
     
-    
-        
-curdoc().add_root(p3)
+    source_heart.data = dict(x = xs,y = ys_heart,color = mypalette_out,group = simplelegend)    
+ 
+
+curdoc().add_root(row(p3,p4))
 
 # Add a periodic callback to be run every 500 milliseconds
 curdoc().add_periodic_callback(update, 1000)
