@@ -35,7 +35,7 @@ engine = create_engine('postgresql://pi:raspberry@localhost:5432/rowingdata')
 
 sqlcmnd = 'SELECT stroketime, distance,rowingid FROM data.strokes;'
 
-sqlcmnd = 'row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, distance,pace,  rowingid FROM data.strokes;'
+sqlcmnd = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, distance,pace,  rowingid FROM data.strokes;'
 
 
 df_out = pd.read_sql_query(sqlcmnd, engine)
