@@ -109,13 +109,14 @@ def update():
          color = mypalette_out,
          group = simplelegend))
     
-    p3.multi_line(
-     xs='x',
-     ys='y',
-     legend='group',
-     source=source,
-     line_color='color')
-    
+    # p3.multi_line(
+      # xs='x',
+     #   ys='y',
+     #legend='group',
+     #source=source,
+     #line_color='color')
+    p3.multi_line(source=source)
+        
 curdoc().add_root(p3)
 
 # Add a periodic callback to be run every 500 milliseconds
