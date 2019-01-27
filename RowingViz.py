@@ -109,13 +109,15 @@ source = ColumnDataSource(data=dict(
      y = ys,
      color = mypalette_out,
      group = grp_list))
-p3 = figure(plot_width=600, plot_height=300)
+p3 = figure(plot_width=1000, plot_height=600)
 p3.multi_line(
      xs='x',
      ys='y',
      legend='group',
      source=source,
      line_color='color')
+
+p3.add_layout(legend, 'right')
 
 show(p3)
 
