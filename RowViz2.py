@@ -81,9 +81,9 @@ source_heart = ColumnDataSource(data=dict(
      color = mypalette_out,
      group = simplelegend))
 
-p3 = figure(plot_width=500, plot_height=400)
+p3 = figure(plot_width=1000, plot_height=400)
 
-p4 = figure(plot_width=500, plot_height=400)
+p4 = figure(plot_width=1000, plot_height=400)
 
 p3.yaxis.axis_label = 'twokestimate'
 p3.yaxis.axis_label_text_font_size = '30pt'
