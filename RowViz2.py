@@ -28,7 +28,7 @@ engine = create_engine('postgresql://pi:raspberry@localhost:5432/rowingdata')
 
 # sqlcmnd = 'SELECT stroketime, distance,rowingid FROM data.strokes;'
 
-sqlcmnd = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, distance,cast(pace as Double precision)/60 pace, (4*cast(pace as Double precision)/60) TwoKEstimate, rowingid FROM data.strokes;'
+sqlcmnd = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, distance,cast(pace as Double precision)/60 pace, (4*cast(pace as Double precision)/60) twokestimate, rowingid FROM data.strokes;'
 
 sqlcmnd_heart = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter,heartrate, rowingid FROM data.strokes;'
 
@@ -63,7 +63,7 @@ xs = [df_out.loc[df_out['rowingid'] == i].strokecounter for i in grp_list]
 print("xs",xs)
 
 
-ys = [df_out.loc[df_out['rowingid'] == i].TwoKEstimate for i in grp_list]
+ys = [df_out.loc[df_out['rowingid'] == i].twokestimate for i in grp_list]
 
 ys_heart = [df_out_heart.loc[df_out_heart['rowingid'] == i].heartrate for i in grp_list]
 
@@ -81,11 +81,11 @@ source_heart = ColumnDataSource(data=dict(
      color = mypalette_out,
      group = simplelegend))
 
-p3 = figure(plot_width=600, plot_height=400)
+p3 = figure(plot_width=500, plot_height=400)
 
-p4 = figure(plot_width=600, plot_height=400)
+p4 = figure(plot_width=500, plot_height=400)
 
-p3.yaxis.axis_label = 'TwoKEstimate'
+p3.yaxis.axis_label = 'twokestimate'
 p3.yaxis.axis_label_text_font_size = '30pt'
 p3.yaxis.major_label_text_font_size = '25pt'
 
@@ -141,7 +141,7 @@ def update():
 
     xs = [df_out.loc[df_out['rowingid'] == i].strokecounter for i in grp_list]
 
-    ys = [df_out.loc[df_out['rowingid'] == i].TwoKEstimate for i in grp_list]
+    ys = [df_out.loc[df_out['rowingid'] == i].twokestimate for i in grp_list]
     
     ys_heart = [df_out_heart.loc[df_out_heart['rowingid'] == i].heartrate for i in grp_list]
 
@@ -153,4 +153,4 @@ def update():
 curdoc().add_root(column(p3,p4))
 
 # Add a periodic callback to be run every 500 milliseconds
-curdoc().add_periodic_callback(update, 1000)
+curdoc().add_periodic_callback(update, 2000)
