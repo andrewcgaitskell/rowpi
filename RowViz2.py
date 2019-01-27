@@ -109,6 +109,7 @@ def update():
          color = mypalette_out,
          group = simplelegend))
     
+    p3.source = source
     
 curdoc().add_root(p3)
 
