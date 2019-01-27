@@ -99,6 +99,15 @@ ydr = DataRange1d()
 
 ######## bokeh - multi_line #############
 grp_list = df_out['rowingid'].unique()
+
+rowscount = len(grp_list)
+
+simplelegend = []
+
+for r in range(0,rowscount):
+    simplelegend.append(r)
+
+
 xs = [df_out.loc[df_out['rowingid'] == i].strokecounter for i in grp_list]
 print("xs",xs)
 
@@ -108,7 +117,7 @@ source = ColumnDataSource(data=dict(
      x = xs,
      y = ys,
      color = mypalette_out,
-     group = grp_list))
+     group = simplelegend))
 p3 = figure(plot_width=1000, plot_height=600)
 p3.multi_line(
      xs='x',
@@ -116,8 +125,6 @@ p3.multi_line(
      legend='group',
      source=source,
      line_color='color')
-
-p3.add_layout(legend, 'right')
 
 show(p3)
 
