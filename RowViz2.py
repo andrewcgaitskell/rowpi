@@ -109,7 +109,12 @@ def update():
          color = mypalette_out,
          group = simplelegend))
     
-    p3.source = source
+    p3.multi_line(
+     xs='x',
+     ys='y',
+     legend='group',
+     source=source,
+     line_color='color')
     
 curdoc().add_root(p3)
 
