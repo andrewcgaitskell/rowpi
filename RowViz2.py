@@ -1,3 +1,6 @@
+######## bokeh serve --show RowViz2.py
+
+
 from bokeh.layouts import column
 
 from bokeh.models import Plot
