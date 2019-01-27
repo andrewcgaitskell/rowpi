@@ -35,9 +35,8 @@ engine = create_engine('postgresql://pi:raspberry@localhost:5432/rowingdata')
 
 sqlcmnd = 'SELECT stroketime, distance,rowingid FROM data.strokes;'
 
+sqlcmnd = 'row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, distance,pace,  rowingid FROM data.strokes;'
 
-# output to static HTML file
-# output_file("lines.html")
 
 df_out = pd.read_sql_query(sqlcmnd, engine)
 
@@ -100,11 +99,11 @@ ydr = DataRange1d()
 
 ######## bokeh - multi_line #############
 grp_list = df_out['rowingid'].unique()
-xs = [df_out.loc[df_out['rowingid'] == i].stroketime for i in grp_list]
+xs = [df_out.loc[df_out['rowingid'] == i].strokecounter for i in grp_list]
 print("xs",xs)
 
 
-ys = [df_out.loc[df_out['rowingid'] == i].distance for i in grp_list]
+ys = [df_out.loc[df_out['rowingid'] == i].pace for i in grp_list]
 source = ColumnDataSource(data=dict(
      x = xs,
      y = ys,
