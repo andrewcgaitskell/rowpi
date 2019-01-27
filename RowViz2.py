@@ -82,9 +82,9 @@ source_heart = ColumnDataSource(data=dict(
      color = mypalette_out,
      group = simplelegend))
 
-p3 = figure(plot_width=1000, plot_height=400)
+p3 = figure(plot_width=600, plot_height=400)
 
-p4 = figure(plot_width=1000, plot_height=400)
+p4 = figure(plot_width=600, plot_height=400)
 
 p3.multi_line(
      xs='x',
@@ -140,7 +140,7 @@ def update():
     source_heart.data = dict(x = xs,y = ys_heart,color = mypalette_out,group = simplelegend)    
  
 
-curdoc().add_root(row(p3,p4))
+curdoc().add_root(column(p3,p4))
 
 # Add a periodic callback to be run every 500 milliseconds
 curdoc().add_periodic_callback(update, 1000)
