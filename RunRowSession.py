@@ -118,7 +118,7 @@ hrm.startMonitor()
 
 ######################################
 
-if __name__ == '__main__':
+def main():
 
     #Connecting to erg
     ergs = list(pyrow.find())
@@ -231,9 +231,14 @@ if __name__ == '__main__':
         
         #df = pd.read_sql_query(sqlcmnd_data, engine)
 
-write_file.close()
+    write_file.close()
 
-cur.close()
-conn.close()
+    cur.close()
+    conn.close()
 
-print "Workout has ended"
+    print "Workout has ended"
+    
+    main()
+
+if __name__ == '__main__':
+    main()
