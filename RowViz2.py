@@ -6,7 +6,7 @@ from bokeh.layouts import row
 from bokeh.models import Plot
 
 from bokeh.models import Grid
-from bokeh.models import DataRange1d
+from bokeh.models import DataRange1d, Range1d
 from bokeh.models import ColumnDataSource
 
 from bokeh.palettes import Spectral11
@@ -88,10 +88,12 @@ p4 = figure(plot_width=1500, plot_height=400)
 p3.yaxis.axis_label = 'twokestimate'
 p3.yaxis.axis_label_text_font_size = '30pt'
 p3.yaxis.major_label_text_font_size = '25pt'
+p3.y_range = Range1d(7, 11)
 
 p4.yaxis.axis_label = 'heart'
 p4.yaxis.axis_label_text_font_size = '30pt'
 p4.yaxis.major_label_text_font_size = '25pt'
+p3.y_range = Range1d(60, 165)
 
 
 p3.multi_line(
