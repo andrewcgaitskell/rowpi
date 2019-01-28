@@ -214,7 +214,7 @@ def Workout(erg_in):
 
        
         #Get workout conditions
-        workout = erg.get_workout()
+        workout = erg_in.get_workout()
         stroke_counter = stroke_counter + 1
         print stroke_counter
         
