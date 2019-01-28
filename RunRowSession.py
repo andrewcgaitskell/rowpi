@@ -118,8 +118,7 @@ hrm.startMonitor()
 
 ######################################
 
-def main():
-
+def ConnectToErg():
     #Connecting to erg
     ergs = list(pyrow.find())
     if len(ergs) == 0:
@@ -127,19 +126,16 @@ def main():
 
     erg = pyrow.pyrow(ergs[0])
     print "Connected to erg."
+    return erg
+  
+def Workout(erg_in):
 
-    #Open and prepare file
-    write_file = open('workout.csv', 'w')
-    #write_file.write('Time, Distance, SPM, Pace, Force Plot\n')
-    #write_file.write('Time, Distance, SPM, Pace\n')
-    write_file.write('time,distance,spm,power,pace,calhr,calories,heartrate,status\n')
-    
     #Loop until workout has begun
-    workout = erg.get_workout()
+    workout = erg_in.get_workout()
     print "Waiting for workout to start ..."
     while workout['state'] == 0:
         time.sleep(1)
-        workout = erg.get_workout()
+        workout = erg_in.get_workout()
     print "Workout has begun"
     rowingid = datetime.datetime.utcnow().isoformat()
 
@@ -148,20 +144,20 @@ def main():
     #Loop until workout ends
     while workout['state'] == 1:
 
-        forceplot = erg.get_force_plot()
+        forceplot = erg_in.get_force_plot()
         #Loop while waiting for drive
         while forceplot['strokestate'] != 2 and workout['state'] == 1:
             #ToDo: sleep?
-            forceplot = erg.get_force_plot()
-            workout = erg.get_workout()
+            forceplot = erg_in.get_force_plot()
+            workout = erg_in.get_workout()
 
         #Record force data during the drive
         force = forceplot['forceplot'] #start of pull (when strokestate first changed to 2)
-        monitor = erg.get_monitor() #get monitor data for start of stroke
+        monitor = erg_in.get_monitor() #get monitor data for start of stroke
         #Loop during drive
         while forceplot['strokestate'] == 2:
             #ToDo: sleep?
-            forceplot = erg.get_force_plot()
+            forceplot = erg_in.get_force_plot()
             force.extend(forceplot['forceplot'])
         #Write data to write_file
         
@@ -206,7 +202,7 @@ def main():
             cur.execute(forceplotquery, (forcetuple,))
             
         conn.commit()   
-        #Write data to write_file
+       
 
         workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str,rowingid)
         
@@ -215,15 +211,8 @@ def main():
         cur.execute(query, (workouttuple,))
         conn.commit()
 
-        write_file.write(workoutdata+'\n') 
 
-        #workoutdata = str(monitor['time']) + "," + str(monitor['distance']) + "," + \
-        #    str(monitor['spm']) + "," + str(monitor['pace']) + ","
-
-        #forcedata = ",".join([str(f) for f in force])
-        #write_file.write(workoutdata + forcedata + '\n')
-        #write_file.write(workoutdata + '\n')
-
+       
         #Get workout conditions
         workout = erg.get_workout()
         stroke_counter = stroke_counter + 1
@@ -231,14 +220,15 @@ def main():
         
         #df = pd.read_sql_query(sqlcmnd_data, engine)
 
-    write_file.close()
+    
 
     cur.close()
     conn.close()
 
     print "Workout has ended"
     
-    main()
+    Workout(erg_in)
 
 if __name__ == '__main__':
-    main()
+    erg_out = ConnectToErg()
+    Workout(erg_out)
