@@ -28,9 +28,9 @@ engine = create_engine('postgresql://pi:raspberry@localhost:5432/rowingdata')
 
 # sqlcmnd = 'SELECT stroketime, distance,rowingid FROM data.strokes;'
 
-sqlcmnd = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, cast(distance as Double precision) distance, cast(pace as Double precision)/60 pace, (4*cast(pace as Double precision)/60) twokestimate, rowingid FROM data.strokes;'
+sqlcmnd = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, round(cast(distance as Double precision)) distance, cast(pace as Double precision)/60 pace, (4*cast(pace as Double precision)/60) twokestimate, rowingid FROM data.strokes;'
 
-sqlcmnd_heart = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter,cast(distance as Double precision) distance,heartrate, rowingid FROM data.strokes;'
+sqlcmnd_heart = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter,round(cast(distance as Double precision)) distance,heartrate, rowingid FROM data.strokes;'
 
 df_out = pd.read_sql_query(sqlcmnd, engine)
 
