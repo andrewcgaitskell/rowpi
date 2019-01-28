@@ -30,7 +30,7 @@ engine = create_engine('postgresql://pi:raspberry@localhost:5432/rowingdata')
 
 sqlcmnd = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, distance,cast(pace as Double precision)/60 pace, (4*cast(pace as Double precision)/60) twokestimate, rowingid FROM data.strokes;'
 
-sqlcmnd_heart = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter,heartrate, rowingid FROM data.strokes;'
+sqlcmnd_heart = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter,distance,heartrate, rowingid FROM data.strokes;'
 
 df_out = pd.read_sql_query(sqlcmnd, engine)
 
@@ -59,7 +59,7 @@ for r in range(0,rowscount):
     simplelegend.append(r)
 
 
-xs = [df_out.loc[df_out['rowingid'] == i].strokecounter for i in grp_list]
+xs = [df_out.loc[df_out['rowingid'] == i].distance for i in grp_list]
 print("xs",xs)
 
 
@@ -139,7 +139,7 @@ def update():
     for r in range(0,rowscount):
         simplelegend.append(r)
 
-    xs = [df_out.loc[df_out['rowingid'] == i].strokecounter for i in grp_list]
+    xs = [df_out.loc[df_out['rowingid'] == i].distance for i in grp_list]
 
     ys = [df_out.loc[df_out['rowingid'] == i].twokestimate for i in grp_list]
     
