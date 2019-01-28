@@ -17,6 +17,9 @@ import bluepy.btle as btle
 import sys
 from time import sleep
 
+import atexit
+
+
 heartrate_uuid = btle.UUID(0x2a37)
 
 # Address of BLE device to connect to.
@@ -129,106 +132,111 @@ def ConnectToErg():
     return erg
   
 def Workout(erg_in):
-
-    #Loop until workout has begun
-    workout = erg_in.get_workout()
-    print "Waiting for workout to start ..."
-    while workout['state'] == 0:
-        time.sleep(1)
+    try:
+        #Loop until workout has begun
         workout = erg_in.get_workout()
-    print "Workout has begun"
-    rowingid = datetime.datetime.utcnow().isoformat()
-
-    stroke_counter = 0
-    
-    #Loop until workout ends
-    while workout['state'] == 1:
-
-        forceplot = erg_in.get_force_plot()
-        #Loop while waiting for drive
-        while forceplot['strokestate'] != 2 and workout['state'] == 1:
-            #ToDo: sleep?
-            forceplot = erg_in.get_force_plot()
+        print "Waiting for workout to start ..."
+        while workout['state'] == 0:
+            time.sleep(1)
             workout = erg_in.get_workout()
+        print "Workout has begun"
+        rowingid = datetime.datetime.utcnow().isoformat()
 
-        #Record force data during the drive
-        force = forceplot['forceplot'] #start of pull (when strokestate first changed to 2)
-        monitor = erg_in.get_monitor() #get monitor data for start of stroke
-        #Loop during drive
-        while forceplot['strokestate'] == 2:
-            #ToDo: sleep?
+        stroke_counter = 0
+
+        #Loop until workout ends
+        while workout['state'] == 1:
+
             forceplot = erg_in.get_force_plot()
-            force.extend(forceplot['forceplot'])
-        #Write data to write_file
+            #Loop while waiting for drive
+            while forceplot['strokestate'] != 2 and workout['state'] == 1:
+                #ToDo: sleep?
+                forceplot = erg_in.get_force_plot()
+                workout = erg_in.get_workout()
+
+            #Record force data during the drive
+            force = forceplot['forceplot'] #start of pull (when strokestate first changed to 2)
+            monitor = erg_in.get_monitor() #get monitor data for start of stroke
+            #Loop during drive
+            while forceplot['strokestate'] == 2:
+                #ToDo: sleep?
+                forceplot = erg_in.get_force_plot()
+                force.extend(forceplot['forceplot'])
+            #Write data to write_file
+
+            try:
+                read = hrm.getHeartbeat()
+                hb = int(read)
+            except Exception as e:
+                hb = 0
+
+            time_str = str(monitor['time'])
+            distance_str = str(monitor['distance'])
+            spm_str = str(monitor['spm'])
+            power_str = str(monitor['power'])
+            pace_str = str(monitor['pace'])
+            calhr_str = str(monitor['calhr'])
+            calories_str = str(monitor['calories'])
+            ##heartrate_str = str(monitor['heartrate'])
+            heartrate_str = str(hb)
+            status_str = str(monitor['status'])
+
+            time_float = float(time_str)
+            distance_float = float(distance_str)
+            spm_float = float(spm_str)
+            power_float = float(power_str)
+            pace_float = float(pace_str)
+            calhr_float = float(calhr_str)
+            calories_float = float(calories_str)
+            heartrate_float = float(heartrate_str)
+            status_float = float(status_str)
+
+            workouttuple_float = (time_float,distance_float,spm_float,power_float,pace_float,calhr_float,calories_float,heartrate_float,status_float,rowingid)
+
+            forcedata = ";".join([str(f) for f in force])   
+
+            print(force)
+
+            i = 0
+
+            for f in force:
+                i=i+1
+                forcetuple = (rowingid,f,i,stroke_counter)
+                cur.execute(forceplotquery, (forcetuple,))
+
+            conn.commit()   
+
+
+            workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str,rowingid)
+
+            workoutdata = ','.join(workouttuple)
+
+            cur.execute(query, (workouttuple,))
+            conn.commit()
+
+
+
+            #Get workout conditions
+            workout = erg_in.get_workout()
+            stroke_counter = stroke_counter + 1
+            print stroke_counter
+
+            #df = pd.read_sql_query(sqlcmnd_data, engine)
+
+
+        print "Workout has ended"
+
+        Workout(erg_in)
         
-        try:
-            read = hrm.getHeartbeat()
-            hb = int(read)
-        except Exception as e:
-            hb = 0
-        
-        time_str = str(monitor['time'])
-        distance_str = str(monitor['distance'])
-        spm_str = str(monitor['spm'])
-        power_str = str(monitor['power'])
-        pace_str = str(monitor['pace'])
-        calhr_str = str(monitor['calhr'])
-        calories_str = str(monitor['calories'])
-        ##heartrate_str = str(monitor['heartrate'])
-        heartrate_str = str(hb)
-        status_str = str(monitor['status'])
-
-        time_float = float(time_str)
-        distance_float = float(distance_str)
-        spm_float = float(spm_str)
-        power_float = float(power_str)
-        pace_float = float(pace_str)
-        calhr_float = float(calhr_str)
-        calories_float = float(calories_str)
-        heartrate_float = float(heartrate_str)
-        status_float = float(status_str)
-
-        workouttuple_float = (time_float,distance_float,spm_float,power_float,pace_float,calhr_float,calories_float,heartrate_float,status_float,rowingid)
-        
-        forcedata = ";".join([str(f) for f in force])   
-        
-        print(force)
-        
-        i = 0
-        
-        for f in force:
-            i=i+1
-            forcetuple = (rowingid,f,i,stroke_counter)
-            cur.execute(forceplotquery, (forcetuple,))
-            
-        conn.commit()   
-       
-
-        workouttuple = (time_str,distance_str,spm_str,power_str,pace_str,calhr_str,calories_str,heartrate_str,status_str,rowingid)
-        
-        workoutdata = ','.join(workouttuple)
-
-        cur.execute(query, (workouttuple,))
-        conn.commit()
-
-
-       
-        #Get workout conditions
-        workout = erg_in.get_workout()
-        stroke_counter = stroke_counter + 1
-        print stroke_counter
-        
-        #df = pd.read_sql_query(sqlcmnd_data, engine)
-
-    
-
-    cur.close()
-    conn.close()
-
-    print "Workout has ended"
-    
-    Workout(erg_in)
+    finally:
+        cur.close()
+        conn.close()
 
 if __name__ == '__main__':
+   
     erg_out = ConnectToErg()
     Workout(erg_out)
+
+
+
+
