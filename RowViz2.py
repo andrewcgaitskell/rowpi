@@ -88,12 +88,14 @@ p4 = figure(plot_width=1500, plot_height=400)
 p3.yaxis.axis_label = 'twokestimate'
 p3.yaxis.axis_label_text_font_size = '30pt'
 p3.yaxis.major_label_text_font_size = '25pt'
-p3.y_range = Range1d(7, 11)
+p3.y_range = Range1d(8, 12)
+p3.x_range = Range1d(0, 2000)
 
 p4.yaxis.axis_label = 'heart'
 p4.yaxis.axis_label_text_font_size = '30pt'
 p4.yaxis.major_label_text_font_size = '25pt'
 p4.y_range = Range1d(60, 165)
+p4.x_range = Range1d(0, 2000)
 
 
 p3.multi_line(
@@ -127,7 +129,11 @@ def update():
     numlines=len(listofrows_out)
 
     mypalette_out=Spectral11[0:numlines]
-
+    
+    del mypalette_out[-1]  
+   
+    mypalette_out.extend(['#000000'])
+        
     xdr = DataRange1d()
     ydr = DataRange1d()
 
