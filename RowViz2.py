@@ -28,9 +28,9 @@ engine = create_engine('postgresql://pi:raspberry@localhost:5432/rowingdata')
 
 # sqlcmnd = 'SELECT stroketime, distance,rowingid FROM data.strokes;'
 
-sqlcmnd = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, round(cast(distance as Double precision)) distance, cast(pace as Double precision)/60 pace, (4*cast(pace as Double precision)/60) twokestimate, rowingid FROM data.strokes;'
+sqlcmnd = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter, stroketime, round(cast(distance as Double precision)) distance, cast(pace as Double precision)/60 pace, (4*cast(pace as Double precision)/60) twokestimate, rowingid FROM data.strokes order by rowingid,distance;'
 
-sqlcmnd_heart = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter,round(cast(distance as Double precision)) distance,heartrate, rowingid FROM data.strokes;'
+sqlcmnd_heart = 'select row_number() OVER(PARTITION BY rowingid ORDER BY distance) strokecounter,round(cast(distance as Double precision)) distance,heartrate, rowingid FROM data.strokes order by rowingid,distance;'
 
 df_out = pd.read_sql_query(sqlcmnd, engine)
 
@@ -81,9 +81,9 @@ source_heart = ColumnDataSource(data=dict(
      color = mypalette_out,
      group = simplelegend))
 
-p3 = figure(plot_width=2000, plot_height=400)
+p3 = figure(plot_width=1500, plot_height=400)
 
-p4 = figure(plot_width=2000, plot_height=400)
+p4 = figure(plot_width=1500, plot_height=400)
 
 p3.yaxis.axis_label = 'twokestimate'
 p3.yaxis.axis_label_text_font_size = '30pt'
