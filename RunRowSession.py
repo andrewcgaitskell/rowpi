@@ -116,8 +116,8 @@ class heartDelegate(btle.DefaultDelegate):
     def getlastbeat(self):
         return self.message
 
-hrm = heartMonitor(BLE_ADDRESS)
-hrm.startMonitor()
+##hrm = heartMonitor(BLE_ADDRESS)
+##hrm.startMonitor()
 
 ######################################
 
@@ -131,7 +131,7 @@ def ConnectToErg():
     print "Connected to erg."
     return erg
   
-def Workout(erg_in):
+def Workout(erg_in, hrm_in):
     try:
         #Loop until workout has begun
         workout = erg_in.get_workout()
@@ -165,7 +165,7 @@ def Workout(erg_in):
             #Write data to write_file
 
             try:
-                read = hrm.getHeartbeat()
+                read = hrm_in.getHeartbeat()
                 hb = int(read)
             except Exception as e:
                 hb = 0
@@ -235,7 +235,9 @@ def Workout(erg_in):
 if __name__ == '__main__':
    
     erg_out = ConnectToErg()
-    Workout(erg_out)
+    hrm = heartMonitor(BLE_ADDRESS)
+    hrm.startMonitor()
+    Workout(erg_out,hrm)
 
 
 
