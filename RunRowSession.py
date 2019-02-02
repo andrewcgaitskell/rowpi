@@ -226,7 +226,7 @@ def Workout(erg_in, hrm_in):
 
         print "Workout has ended"
 
-        Workout(erg_in)
+        Workout(erg_in,hrm_in)
         
     finally:
         cur.close()
