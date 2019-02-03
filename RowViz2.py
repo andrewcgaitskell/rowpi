@@ -41,7 +41,7 @@ newy_out = []
 
 listofrows_out = df_out['rowingid'].unique()
 
-numlines=len(listofrows_out)
+numlines=len(listofrows_out) + 1 ## this is to allow extra colors if needed
 
 mypalette_out=Spectral11[0:numlines]
 
@@ -126,8 +126,8 @@ def update():
 
     listofrows_out = df_out['rowingid'].unique()
 
-    numlines=len(listofrows_out)
-
+    numlines=len(listofrows_out) + 1 ## this is to allow extra colors
+    
     mypalette_out=Spectral11[0:numlines]
     
     del mypalette_out[-1]  
