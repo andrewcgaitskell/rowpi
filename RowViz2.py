@@ -10,6 +10,7 @@ from bokeh.models import DataRange1d, Range1d
 from bokeh.models import ColumnDataSource
 
 from bokeh.palettes import Spectral11
+from bokeh.palettes import Magma256
 from bokeh.plotting import figure, curdoc
 from bokeh.server.server import Server
 from bokeh.themes import Theme
@@ -41,9 +42,9 @@ newy_out = []
 
 listofrows_out = df_out['rowingid'].unique()
 
-numlines=len(listofrows_out) + 1 ## this is to allow extra colors if needed
+numlines=len(listofrows_out) ## this is to allow extra colors if needed
 
-mypalette_out=Spectral11[0:numlines]
+mypalette_out=Magma256[0:numlines]
 
 xdr = DataRange1d()
 ydr = DataRange1d()
@@ -128,7 +129,7 @@ def update():
 
     numlines=len(listofrows_out) + 1 ## this is to allow extra colors
     
-    mypalette_out=Spectral11[0:numlines]
+    mypalette_out=Magma256[0:numlines]
     
     del mypalette_out[-1]  
    
