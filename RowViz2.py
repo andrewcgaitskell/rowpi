@@ -89,7 +89,7 @@ p4 = figure(plot_width=1500, plot_height=400)
 p3.yaxis.axis_label = 'twokestimate'
 p3.yaxis.axis_label_text_font_size = '30pt'
 p3.yaxis.major_label_text_font_size = '25pt'
-p3.y_range = Range1d(9, 11)
+p3.y_range = Range1d(8, 11)
 p3.x_range = Range1d(0, 6000)
 
 p4.yaxis.axis_label = 'heart'
