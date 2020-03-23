@@ -150,16 +150,18 @@ class PyErg(object):
         Configures usb connection and sets erg value
         """
         from warnings import warn
-
-        if sys.platform != 'win32':
-            try:
-                #Check to see if driver is attached to kernel (linux)
-                if erg.is_kernel_driver_active(INTERFACE):
-                    erg.detach_kernel_driver(INTERFACE)
-                else:
-                    warn("DEBUG: usb kernel driver not on {}".format(sys.platform))
-            except:
-                raise
+        
+        # commented out fllowing for pi
+        # from here
+        #if sys.platform != 'win32':
+        #    try:
+        #        #Check to see if driver is attached to kernel (linux)
+        #        if erg.is_kernel_driver_active(INTERFACE):
+        #            erg.detach_kernel_driver(INTERFACE)
+        #        else:
+        #            warn("DEBUG: usb kernel driver not on {}".format(sys.platform))
+        #    except:
+        #        raise
 
         #Claim interface (Needs Testing To See If Necessary)
         usb.util.claim_interface(erg, INTERFACE)
