@@ -6,7 +6,7 @@ import time
 
 class HRM(bluepy.btle.Peripheral):
     def __init__(self, addr):
-        Peripheral.__init__(self, addr, addrType=bluepy.btle.ADDR_TYPE_RANDOM)
+        bluepy.btle.Peripheral(self, addr, addrType=bluepy.btle.ADDR_TYPE_RANDOM)
 
 if __name__=="__main__":
     cccid = bluepy.btle.AssignedNumbers.client_characteristic_configuration
