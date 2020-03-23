@@ -163,17 +163,20 @@ class PyErg(object):
 
         #Claim interface (Needs Testing To See If Necessary)
         usb.util.claim_interface(erg, INTERFACE)
-
+        
+        # commented out the following to remove error on pi
+        # from here
         #Linux throws error, reason unknown
-        try:
-            erg.set_configuration() #required to configure USB connection
-            #Ubuntu Linux returns 'usb.core.USBError: Resource busy' but rest of code still works
-        except USBError as e:
-            warn("DEBUG: usb error whilst setting configuration, {}".format(e))
+        #try:
+        #    erg.set_configuration() #required to configure USB connection
+        #    #Ubuntu Linux returns 'usb.core.USBError: Resource busy' but rest of code still works
+        #except USBError as e:
+        #    warn("DEBUG: usb error whilst setting configuration, {}".format(e))
         # except Exception as e:
         #     if not isinstance(e, USBError):
         #         raise e
-
+        # to here
+        
         self.erg = erg
 
         configuration = erg[0]
