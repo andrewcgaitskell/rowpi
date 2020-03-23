@@ -31,7 +31,7 @@ if __name__=="__main__":
         t0=time.time()
         def print_hr(cHandle, data):
             bpm = ord(data[1])
-            print bpm,"%.2f"%(time.time()-t0)
+            print(bpm,"%.2f"%(time.time()-t0))
         hrm.delegate.handleNotification = print_hr
 
         for x in range(10):
