@@ -1,7 +1,7 @@
 #import pyrow
 
-from py3row import pyrow as pyrow
-from py3row.ergmanager import ErgManager
+from pyrow import pyrow as pyrow
+from pyrow.ergmanager import ErgManager
 
 import time
 
