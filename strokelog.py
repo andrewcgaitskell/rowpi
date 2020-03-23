@@ -1,4 +1,8 @@
-import pyrow
+#import pyrow
+
+from py3row import pyrow as pyrow
+from py3row.ergmanager import ErgManager
+
 import time
 
 import psycopg2
