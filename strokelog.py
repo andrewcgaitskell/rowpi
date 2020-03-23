@@ -45,7 +45,7 @@ if __name__ == '__main__':
     if len(ergs) == 0:
         exit("No ergs found.")
 
-    erg = pyrow(ergs[0])
+    erg = pyrow.PyErg(ergs[0])
     print("Connected to erg.")
 
     #Open and prepare file
