@@ -52,11 +52,11 @@ if __name__ == '__main__':
     
     #Loop until workout has begun
     workout = erg.get_workout()
-    print "Waiting for workout to start ..."
+    print("Waiting for workout to start ...")
     while workout['state'] == 0:
         time.sleep(1)
         workout = erg.get_workout()
-    print "Workout has begun"
+    print("Workout has begun")
     rowingid = datetime.datetime.utcnow().isoformat()
 
     stroke_counter = 0
