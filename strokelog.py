@@ -68,7 +68,7 @@ if __name__ == '__main__':
     #Loop until workout ends
     while workout['state'] == 1:
 
-        forceplot = erg.get_force_plot()
+        forceplot = erg.get_forceplot()
         #Loop while waiting for drive
         while forceplot['strokestate'] != 2 and workout['state'] == 1:
             #ToDo: sleep?
