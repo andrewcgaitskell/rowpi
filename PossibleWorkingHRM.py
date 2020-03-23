@@ -1,15 +1,17 @@
-from btle import Peripheral, ADDR_TYPE_RANDOM, AssignedNumbers
+import bluepy
+
+#from btle import Peripheral, ADDR_TYPE_RANDOM, AssignedNumbers
 
 import time
 
-class HRM(Peripheral):
+class HRM(bluepy.btle.Peripheral):
     def __init__(self, addr):
-        Peripheral.__init__(self, addr, addrType=ADDR_TYPE_RANDOM)
+        Peripheral.__init__(self, addr, addrType=bluepy.btle.ADDR_TYPE_RANDOM)
 
 if __name__=="__main__":
-    cccid = AssignedNumbers.client_characteristic_configuration
-    hrmid = AssignedNumbers.heart_rate
-    hrmmid = AssignedNumbers.heart_rate_measurement
+    cccid = bluepy.btle.AssignedNumbers.client_characteristic_configuration
+    hrmid = bluepy.btle.AssignedNumbers.heart_rate
+    hrmmid = bluepy.btle.AssignedNumbers.heart_rate_measurement
 
     hrm = None
     try:
