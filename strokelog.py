@@ -42,7 +42,7 @@ if __name__ == '__main__':
         exit("No ergs found.")
 
     erg = pyrow.pyrow(ergs[0])
-    print "Connected to erg."
+    print("Connected to erg.")
 
     #Open and prepare file
     write_file = open('workout.csv', 'w')
@@ -137,7 +137,7 @@ write_file.close()
 cur.close()
 conn.close()
 
-print "Workout has ended"
+print("Workout has ended")
 
 
 
