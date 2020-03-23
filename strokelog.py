@@ -81,7 +81,7 @@ if __name__ == '__main__':
         #Loop during drive
         while forceplot['strokestate'] == 2:
             #ToDo: sleep?
-            forceplot = erg.get_force_plot()
+            forceplot = erg.get_forceplot()
             force.extend(forceplot['forceplot'])
 
         #Write data to write_file
