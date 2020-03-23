@@ -128,7 +128,7 @@ if __name__ == '__main__':
         #Get workout conditions
         workout = erg.get_workout()
         stroke_counter = stroke_counter + 1
-        print stroke_counter
+        print(stroke_counter)
         
         #df = pd.read_sql_query(sqlcmnd_data, engine)
 
