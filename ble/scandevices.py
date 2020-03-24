@@ -21,7 +21,7 @@ class LocalBLEDevice(Peripheral):
         else:
             self.firmwareVersion = u''
         
-        self.characteristics = self.svcs.getCharacteristics()
+        self.characteristics = self.getCharacteristics()
         
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
