@@ -36,14 +36,14 @@ for dev in devices:
     print("Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi))
     
     if dev.addr == 'b0:b4:48:bd:7a:87':
-        try:
-            ldev = LocalBLEDevice(dev.addr);
-            l_dict = ldev.svcs;
-            d_items = l_dict.items();
-            for item in a_dict.items():
-                print(item);
-        except:
-            a = 1;
+        #try:
+        ldev = LocalBLEDevice(dev.addr);
+        l_dict = ldev.svcs;
+        d_items = l_dict.items();
+        for item in a_dict.items():
+            print(item);
+        #except:
+        #    a = 1;
     for (adtype, desc, value) in dev.getScanData():
         print("  %s = %s" % (desc, value))
 
