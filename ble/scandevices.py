@@ -52,11 +52,11 @@ for dev in devices:
             print("local_uuid -> ", local_uuid, " value ->" , value);
         #except:
         #    a = 1;
-        c_dict = ldev.characteristics;
-        c_items = c_dict.items()
-        for key, value in c_items:
+        c_list = ldev.characteristics;
+        
+        for l in c_list:
             try:
-                print("  %s = %s" % (key, value))
+                print("characteristic list -> ",l)
             except:
                 a = 1;
     for (adtype, desc, value) in dev.getScanData():
