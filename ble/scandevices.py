@@ -40,8 +40,12 @@ for dev in devices:
         ldev = LocalBLEDevice(dev.addr);
         l_dict = ldev.svcs;
         d_items = l_dict.items();
-        for item in d_items:
-            print(item);
+        for key, value in d_items:
+            try:
+                local_uuid = key.getCommonName()
+            except:
+                local_uuid = ''
+        print(local_uuid, value);
         #except:
         #    a = 1;
     for (adtype, desc, value) in dev.getScanData():
