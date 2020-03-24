@@ -34,7 +34,10 @@ devices = scanner.scan(10.0)
 
 for dev in devices:
     print("Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi))
-    ldev = LocalBLEDevice(dev.addr)
+    try:
+        ldev = LocalBLEDevice(dev.addr)
+    except:
+        a = 1;
     for (adtype, desc, value) in dev.getScanData():
         print("  %s = %s" % (desc, value))
 
