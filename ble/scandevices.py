@@ -14,10 +14,10 @@ class LocalBLEDevice(Peripheral):
         if version==AUTODETECT:
             svcs = self.discoverServices();
         fwVers = self.getCharacteristics(uuid=AssignedNumbers.firmwareRevisionString)
-            if len(fwVers) >= 1:
-                self.firmwareVersion = fwVers[0].read().decode("utf-8")
-            else:
-                self.firmwareVersion = u''
+        if len(fwVers) >= 1:
+            self.firmwareVersion = fwVers[0].read().decode("utf-8")
+        else:
+            self.firmwareVersion = u''
         
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
