@@ -40,7 +40,7 @@ for dev in devices:
         ldev = LocalBLEDevice(dev.addr);
         l_dict = ldev.svcs;
         d_items = l_dict.items();
-        for item in a_dict.items():
+        for item in d_items:
             print(item);
         #except:
         #    a = 1;
