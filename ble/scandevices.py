@@ -13,11 +13,15 @@ class LocalBLEDevice(Peripheral):
         Peripheral.__init__(self,addr)
         if version==AUTODETECT:
             self.svcs = self.discoverServices();
+        
         fwVers = self.getCharacteristics(uuid=AssignedNumbers.firmwareRevisionString)
+        
         if len(fwVers) >= 1:
             self.firmwareVersion = fwVers[0].read().decode("utf-8")
         else:
             self.firmwareVersion = u''
+        
+        self.characteristics = self.svcs.getCharacteristics()
         
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
@@ -45,9 +49,16 @@ for dev in devices:
                 local_uuid = key.getCommonName()
             except:
                 local_uuid = ''
-        print("local_uuid -> ", local_uuid, " value ->" , value);
+            print("local_uuid -> ", local_uuid, " value ->" , value);
         #except:
         #    a = 1;
+        c_dict = ldev.characteristics;
+        c_items = c_dict.items()
+        for key, value in c_items:
+            try:
+                print("  %s = %s" % (key, value))
+            except:
+                a = 1;
     for (adtype, desc, value) in dev.getScanData():
         print("  %s = %s" % (desc, value))
 
