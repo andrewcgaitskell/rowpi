@@ -2,6 +2,21 @@
     
 from bluepy.btle import Scanner, DefaultDelegate
 
+from bluepy.btle import UUID, Peripheral, AssignedNumbers
+import struct
+import math
+
+class LocalBLEDevice(Peripheral):
+    def __init__(self,addr,version=AUTODETECT:
+        Peripheral.__init__(self,addr)
+        if version==AUTODETECT:
+            svcs = self.discoverServices();
+        fwVers = self.getCharacteristics(uuid=AssignedNumbers.firmwareRevisionString)
+            if len(fwVers) >= 1:
+                self.firmwareVersion = fwVers[0].read().decode("utf-8")
+            else:
+                self.firmwareVersion = u''
+        
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
         DefaultDelegate.__init__(self)
@@ -17,10 +32,11 @@ devices = scanner.scan(10.0)
 
 for dev in devices:
     print("Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi))
+    ldev = LocalBLEDevice(dev.addr)
     for (adtype, desc, value) in dev.getScanData():
         print("  %s = %s" % (desc, value))
 
-print("new code")
+#print("new code")
         
 #for dev in devices:
 #    print("Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi))
