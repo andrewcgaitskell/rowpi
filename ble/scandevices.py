@@ -22,14 +22,14 @@ for dev in devices:
 
 print("new code")
         
-for dev in devices:
-    print("Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi))
-    dev_adtype = dev.addrType
-    
-    gd = dev.getDescription(dev_adtype)
-    print("gd",gd)
-    
-    gsd = dev.getScanData()
-    for (adtype, desc, value) in gsd:
-        print("  %s = %s" % (desc, value))
+#for dev in devices:
+#    print("Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi))
+#    dev_adtype = dev.addrType
+#    
+#    gd = dev.getDescription(dev_adtype)
+#    print("gd",gd)
+#    
+#    gsd = dev.getScanData()
+#    for (adtype, desc, value) in gsd:
+#        print("  %s = %s" % (desc, value))
         
