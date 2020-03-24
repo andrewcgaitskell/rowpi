@@ -38,7 +38,10 @@ for dev in devices:
     if dev.addr == 'b0:b4:48:bd:7a:87':
         try:
             ldev = LocalBLEDevice(dev.addr);
-            print(ldev.svcs);
+            l_dict = ldev.svcs;
+            d_items = l_dict.items();
+            for item in a_dict.items():
+                print(item);
         except:
             a = 1;
     for (adtype, desc, value) in dev.getScanData():
