@@ -12,7 +12,7 @@ class LocalBLEDevice(Peripheral):
     def __init__(self,addr,version=AUTODETECT):
         Peripheral.__init__(self,addr)
         if version==AUTODETECT:
-            svcs = self.discoverServices();
+            self.svcs = self.discoverServices();
         fwVers = self.getCharacteristics(uuid=AssignedNumbers.firmwareRevisionString)
         if len(fwVers) >= 1:
             self.firmwareVersion = fwVers[0].read().decode("utf-8")
