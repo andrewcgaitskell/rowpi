@@ -45,7 +45,7 @@ for dev in devices:
                 local_uuid = key.getCommonName()
             except:
                 local_uuid = ''
-        print(local_uuid, value);
+        print("local_uuid -> ", local_uuid, " value ->" , value);
         #except:
         #    a = 1;
     for (adtype, desc, value) in dev.getScanData():
