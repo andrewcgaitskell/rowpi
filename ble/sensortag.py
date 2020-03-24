@@ -433,7 +433,7 @@ def main():
     parser.add_argument('-G','--gyroscope', action='store_true', default=False)
     parser.add_argument('-K','--keypress', action='store_true', default=False)
     parser.add_argument('-L','--light', action='store_true', default=False)
-    parser.add_argument('-P','--battery', action='store_true', default=False)
+    #parser.add_argument('-P','--battery', action='store_true', default=False)
     parser.add_argument('--all', action='store_true', default=False)
 
     arg = parser.parse_args(sys.argv[1:])
@@ -454,8 +454,8 @@ def main():
         tag.magnetometer.enable()
     if arg.gyroscope or arg.all:
         tag.gyroscope.enable()
-    if arg.battery or arg.all:
-        tag.battery.enable()
+    #if arg.battery or arg.all:
+    #    tag.battery.enable()
     if arg.keypress or arg.all:
         tag.keypress.enable()
         tag.setDelegate(KeypressDelegate())
@@ -484,8 +484,8 @@ def main():
            print("Gyroscope: ", tag.gyroscope.read())
        if (arg.light or arg.all) and tag.lightmeter is not None:
            print("Light: ", tag.lightmeter.read())
-       if arg.battery or arg.all:
-           print("Battery: ", tag.battery.read())
+       #if arg.battery or arg.all:
+       #    print("Battery: ", tag.battery.read())
        if counter >= arg.count and arg.count != 0:
            break
        counter += 1
