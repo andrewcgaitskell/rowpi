@@ -5,9 +5,11 @@ from bluepy.btle import Scanner, DefaultDelegate
 from bluepy.btle import UUID, Peripheral, AssignedNumbers
 import struct
 import math
+# Sensortag versions
+AUTODETECT = "-"
 
 class LocalBLEDevice(Peripheral):
-    def __init__(self,addr,version=AUTODETECT:
+    def __init__(self,addr,version=AUTODETECT):
         Peripheral.__init__(self,addr)
         if version==AUTODETECT:
             svcs = self.discoverServices();
