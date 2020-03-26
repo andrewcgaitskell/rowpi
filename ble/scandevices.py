@@ -39,7 +39,7 @@ devices = scanner.scan(10.0)
 for dev in devices:
     print("Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi))
     
-    if dev.addr == 'b0:b4:48:bd:7a:87':
+    if (dev.addr == 'b0:b4:48:bd:7a:87' or dev.addr == 'FA:D0:B8:89:AE:1F'):
         #try:
         ldev = LocalBLEDevice(dev.addr);
         l_dict = ldev.svcs;
