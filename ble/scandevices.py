@@ -5,14 +5,17 @@ from bluepy.btle import Scanner, DefaultDelegate
 from bluepy.btle import UUID, Peripheral, AssignedNumbers
 import struct
 import math
-# Sensortag versions
+
+ADDR_TYPE_PUBLIC = "public"
+ADDR_TYPE_RANDOM = "random"
+
 AUTODETECT = "-"
 addr = "fa:d0:b8:89:ae:1f"
 
 class LocalBLEDevice():
     def __init__(self,addr):
         #Peripheral.__init__(self,addr)
-        self.peripheral = btle.Peripheral(self,addr, btle.ADDR_TYPE_PUBLIC)
+        self.peripheral = btle.Peripheral(self,addr, ADDR_TYPE_PUBLIC)
         
         self.svcs = self.discoverServices();
         
