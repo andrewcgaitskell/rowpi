@@ -1,4 +1,4 @@
-https://github.com/kloppen/trainerpi/blob/master/bleCSC.py
+#https://github.com/kloppen/trainerpi/blob/master/bleCSC.py
 
 from bluepy.btle import UUID, Peripheral, DefaultDelegate
 import struct
@@ -220,3 +220,18 @@ class CSCSensor:
         :return: A boolean indicating whether a notification was received
         """
         return self.peripheral.waitForNotifications(wait_time)
+    
+#FA:D0:B8:89:AE:1F Speed and Cadence Sensor Wahoo SC v1.4
+                    
+def main():
+    """ Main program """
+    # Code goes over here.
+    sensorMACaddress = 'fa:d0:b8:89:ae:1f'
+    scsensor = CSCSensor()
+    c.connect(sensorMACaddress);
+    return 0
+
+
+if __name__ == "__main__":
+    # execute only if run as a script
+    main()
