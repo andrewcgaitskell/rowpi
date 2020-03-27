@@ -228,7 +228,7 @@ def main():
     # Code goes over here.
     sensorMACaddress = 'fa:d0:b8:89:ae:1f'
     scsensor = CSCSensor()
-    c.connect(sensorMACaddress);
+    scsensor.connect(sensorMACaddress);
     return 0
 
 
