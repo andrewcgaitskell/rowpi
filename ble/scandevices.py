@@ -7,6 +7,7 @@ import struct
 import math
 # Sensortag versions
 AUTODETECT = "-"
+addr = "fa:d0:b8:89:ae:1f"
 
 class LocalBLEDevice(addr):
     def __init__(self,addr):
