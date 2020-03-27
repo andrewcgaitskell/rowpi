@@ -19,10 +19,7 @@ BORDER = 10
 FONT_NAME = "DejaVuSans"
 FONT_SIZE = 28
 SCREEN_UPDATE_DELAY = 0.05  # Display update should be fast for the timer to "look" right
-CSC_SENSOR_ADDRESSES = (
-    "D0:AC:A5:BF:B7:52",
-    "C6:F9:84:6A:C0:8E"
-)
+CSC_SENSOR_ADDRESSES = ("FA:D0:B8:89:AE:1F")
 
 
 display_column = collections.namedtuple("display_column", ("title", "data"))
