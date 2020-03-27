@@ -223,15 +223,15 @@ class CSCSensor:
     
 #FA:D0:B8:89:AE:1F Speed and Cadence Sensor Wahoo SC v1.4
                     
-def main():
-    """ Main program """
-    # Code goes over here.
-    sensorMACaddress = 'fa:d0:b8:89:ae:1f'
-    scsensor = CSCSensor()
-    scsensor.connect(sensorMACaddress);
-    return 0
+#def main():
+#    """ Main program """
+#    # Code goes over here.
+#    sensorMACaddress = 'fa:d0:b8:89:ae:1f'
+#    scsensor = CSCSensor()
+#    scsensor.connect(sensorMACaddress);
+#    return 0
 
 
-if __name__ == "__main__":
-    # execute only if run as a script
-    main()
+#if __name__ == "__main__":
+#    # execute only if run as a script
+#    main()
