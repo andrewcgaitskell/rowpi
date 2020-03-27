@@ -1,7 +1,7 @@
 #https://github.com/kloppen/trainerpi/blob/master/trainerpi.py
 
 import asyncio
-import bleCSC
+import ReadBikeSensor
 import collections
 import numpy
 import os
