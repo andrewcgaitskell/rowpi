@@ -1,8 +1,8 @@
 from bluepy import btle
  
- print "Connecting..."
+ print("Connecting...")
  dev = btle.Peripheral("FA:D0:B8:89:AE:1F")
  
- print "Services..."
+ print("Services...")
  for svc in dev.services:
-     print str(svc)
+     print(str(svc))
