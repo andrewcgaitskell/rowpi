@@ -15,7 +15,7 @@ addr = "fa:d0:b8:89:ae:1f"
 class LocalBLEDevice():
     def __init__(self,addr):
         #Peripheral.__init__(self,addr)
-        self.peripheral = btle.Peripheral(self,addr, ADDR_TYPE_PUBLIC)
+        self.peripheral = Peripheral(self,addr, ADDR_TYPE_PUBLIC)
         
         self.svcs = self.discoverServices();
         
