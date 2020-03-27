@@ -8,11 +8,12 @@ import math
 # Sensortag versions
 AUTODETECT = "-"
 
-class LocalBLEDevice(Peripheral):
-    def __init__(self,addr,version=AUTODETECT):
-        Peripheral.__init__(self,addr)
-        if version==AUTODETECT:
-            self.svcs = self.discoverServices();
+class LocalBLEDevice(addr):
+    def __init__(self,addr):
+        #Peripheral.__init__(self,addr)
+        self.peripheral = btle.Peripheral(self,addr, btle.ADDR_TYPE_PUBLIC)
+        
+        self.svcs = self.discoverServices();
         
         #fwVers = self.getCharacteristics(uuid=AssignedNumbers.firmwareRevisionString)
         
