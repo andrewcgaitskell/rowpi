@@ -23,7 +23,7 @@ class heartMonitor:
         except Exception as e:
             print(str(e))
             self.p = 0
-            print "Not connected"
+            print("Not connected")
 
     def startMonitor(self):
         try:
