@@ -76,6 +76,6 @@ while True:
         if hb != 0:
             print(hb)
     except Exception as e:
-        print e
+        print(e)
             
 
