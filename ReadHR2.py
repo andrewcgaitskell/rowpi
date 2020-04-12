@@ -72,9 +72,9 @@ while True:
     sleep(1) # Need this to slow the changes down
     try:
         read = hrm.getHeartbeat()
-        #hb = int(read)
+        hb = int(read)
         #if hb != 0:
-        #    print(hb)
+        print(hb)
     except Exception as e:
         print(e)
             
