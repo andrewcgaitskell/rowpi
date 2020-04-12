@@ -29,6 +29,7 @@ class heartMonitor:
         try:
             self.p.writeCharacteristic(0x12, struct.pack('<bb', 0x01, 0x00), False)
             self.p.writeCharacteristic(0x11, '\x04', False)
+            return 1
         except:
             e = sys.exc_info()[0]
             print("HeartMonitor Error: %s" % e)
@@ -66,7 +67,7 @@ class heartDelegate(btle.DefaultDelegate):
         return self.message
 
 hrm = heartMonitor(BLE_ADDRESS)
-hrm.startMonitor()
+x = hrm.startMonitor()
 
 while True:
     sleep(1) # Need this to slow the changes down
