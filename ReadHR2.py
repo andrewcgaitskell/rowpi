@@ -21,7 +21,7 @@ class heartMonitor:
             self.p = btle.Peripheral(mac)
             self.p.setDelegate(heartDelegate())
         except Exception as e:
-            print(str(e)
+            print(str(e))
             self.p = 0
             print "Not connected"
 
