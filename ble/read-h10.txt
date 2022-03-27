@@ -1,0 +1,71 @@
+https://gist.github.com/fphammerle/d758ecf1968c0708eca66b5e9e5347d1
+
+$ sudo hcitool lescan
+AA:BB:CC:DD:EE:FF Polar H10 ABCDEFGH
+
+$ gatttool -t random --device=AA:BB:CC:DD:EE:FF --interactive
+[AA:BB:CC:DD:EE:FF][LE]> connect
+Attempting to connect to AA:BB:CC:DD:EE:FF
+Connection successful
+[AA:BB:CC:DD:EE:FF][LE]> primary
+attr handle: 0x0001, end grp handle: 0x0009 uuid: 00001800-0000-1000-8000-00805f9b34fb
+attr handle: 0x000a, end grp handle: 0x000d uuid: 00001801-0000-1000-8000-00805f9b34fb
+attr handle: 0x000e, end grp handle: 0x0013 uuid: 0000180d-0000-1000-8000-00805f9b34fb
+attr handle: 0x0014, end grp handle: 0x0029 uuid: 0000181c-0000-1000-8000-00805f9b34fb
+attr handle: 0x002a, end grp handle: 0x0038 uuid: 0000180a-0000-1000-8000-00805f9b34fb
+attr handle: 0x0039, end grp handle: 0x003e uuid: 0000fea5-0000-1000-8000-00805f9b34fb
+attr handle: 0x003f, end grp handle: 0x0042 uuid: 0000180f-0000-1000-8000-00805f9b34fb
+attr handle: 0x0043, end grp handle: 0x0048 uuid: 6217ff4b-fb31-1140-ad5a-a45545d7ecf3
+attr handle: 0x0049, end grp handle: 0xffff uuid: 0000feee-0000-1000-8000-00805f9b34fb
+[AA:BB:CC:DD:EE:FF][LE]> # heart rate:
+[AA:BB:CC:DD:EE:FF][LE]> # attr handle: 0x000e
+[AA:BB:CC:DD:EE:FF][LE]> # end grp handle: 0x0013
+[AA:BB:CC:DD:EE:FF][LE]> # uuid: 0000180d-0000-1000-8000-00805f9b34fb
+[AA:BB:CC:DD:EE:FF][LE]> char-desc 0x000e 0x0013
+handle: 0x000e, uuid: 00002800-0000-1000-8000-00805f9b34fb
+handle: 0x000f, uuid: 00002803-0000-1000-8000-00805f9b34fb
+handle: 0x0010, uuid: 00002a37-0000-1000-8000-00805f9b34fb
+handle: 0x0011, uuid: 00002902-0000-1000-8000-00805f9b34fb
+handle: 0x0012, uuid: 00002803-0000-1000-8000-00805f9b34fb
+handle: 0x0013, uuid: 00002a38-0000-1000-8000-00805f9b34fb
+[AA:BB:CC:DD:EE:FF][LE]> # handle: 0x0011, uuid: 00002902-0000-1000-8000-00805f9b34fb
+[AA:BB:CC:DD:EE:FF][LE]> char-read-hnd 0x0011
+Characteristic value/descriptor: 00 00
+[AA:BB:CC:DD:EE:FF][LE]> char-write-req 0x0011 0100
+Characteristic value was written successfully
+Notification handle = 0x0010 value: 10 51 aa 02 ce 02
+Notification handle = 0x0010 value: 10 52 23 03
+Notification handle = 0x0010 value: 10 51 17 03
+Notification handle = 0x0010 value: 10 51 17 03
+Notification handle = 0x0010 value: 10 51 95 03
+Notification handle = 0x0010 value: 10 4e ba 03 9f 03
+Notification handle = 0x0010 value: 10 4d 2c 03
+Notification handle = 0x0010 value: 10 4d c7 02 cb 02
+Notification handle = 0x0010 value: 10 4e ad 02
+Notification handle = 0x0010 value: 10 50 a7 02 94 02
+Notification handle = 0x0010 value: 10 51 82 02
+Notification handle = 0x0010 value: 10 53 a5 02
+Notification handle = 0x0010 value: 10 54 46 03
+Notification handle = 0x0010 value: 10 54 cf 03
+Notification handle = 0x0010 value: 10 52 8d 03
+Notification handle = 0x0010 value: 10 4f fa 02 57 03
+Notification handle = 0x0010 value: 10 4f 7b 03
+Notification handle = 0x0010 value: 10 4e 9c 03
+Notification handle = 0x0010 value: 10 4d 18 03 04 03
+Notification handle = 0x0010 value: 10 4d 1f 03
+Notification handle = 0x0010 value: 10 4d e0 02
+Notification handle = 0x0010 value: 10 4e fd 02 b5 02
+Notification handle = 0x0010 value: 10 4e d9 02
+Notification handle = 0x0010 value: 10 4f 4a 03
+Notification handle = 0x0010 value: 10 4f 7f 03
+Notification handle = 0x0010 value: 10 4e 8b 03
+Notification handle = 0x0010 value: 10 4d f2 02 4a 03
+Notification handle = 0x0010 value: 10 4d 63 03
+Notification handle = 0x0010 value: 10 4d 52 03
+Notification handle = 0x0010 value: 10 4c e4 02
+Notification handle = 0x0010 value: 10 4c 55 03 4f 03
+Notification handle = 0x0010 value: 10 4c 57 03
+[AA:BB:CC:DD:EE:FF][LE]> char-write-req 0x0011 0000
+Notification handle = 0x0010 value: 10 4c 1c 03
+Characteristic value was written successfully
+[AA:BB:CC:DD:EE:FF][LE]> disconnect
